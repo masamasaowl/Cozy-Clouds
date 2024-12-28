@@ -1,0 +1,44 @@
+/* Primary: Soft Sky Blue (#A0DFF7)
+Accent: Pale Peach (#FFD1BA)
+Background: Whisper White (#F9FAFC)
+Text: Charcoal Gray (#333333)
+Buttons/Highlights: Warm Yellow (#FFD580) */
+*{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: border-box;
+}
+body{
+    background-color:#F9FAFC ;
+}
+.poppins-light {
+    font-family: "Poppins", serif;
+    font-weight: 300;
+    font-style: normal;
+}
+.lora {
+  font-family: "Lora", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: italic;
+}
+.navbar{
+    background-color: #A0DFF7;
+    height: 60px;
+}
+.book{
+    background-color: #FFD580;
+    color:#333333 ;
+}
+.book:hover{
+    background-color: #FFD1BA;
+}
+h1{
+    color: #333333;
+}
+
+.sub{
+    background-color: #FFD580;
+    color:#333333 ;
+}

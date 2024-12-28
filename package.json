@@ -1,0 +1,18 @@
+{
+  "name": "cozy-clouds",
+  "version": "1.0.0",
+  "description": "My first major project incorporating Frontend, backend and databases🌸✨ <br> It is a platform for wandering travellers looking for cozy spaces  <br> The entire project would be completed in three phases so many more functionalities are yet to come",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "masamasaowl",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.9.2"
+  }
+}
