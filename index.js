@@ -20,6 +20,8 @@ async function main() {
   await mongoose.connect('mongodb://127.0.0.1:27017/cozyClouds');
 };
 
+// models
+const Listing = require("./models/listing.js")
 
 app.use(methodOverride("_method"));
 
@@ -38,8 +40,39 @@ app.listen(port, () => {
 
 //  =============================================
 
+// ==================== Test document ============
+// app.get("/testListing", async(req,res) => {
+//     let sampleListing = new Listing ({
+//       title : "The Angkor Wat",
+//       description : "beautiful place",
+//       price : 1,
+//       location : "Cambodia"
+//     });
 
-// ===================== Home Page ===============
+//     await sampleListing.save();
+//     console.log("sample was saved");
+//     res.send("succesful");
+// });
+
+// =================== Home Page =================
 app.get("/", (req,res) => {
-    res.render("home");
+  res.render("home.ejs");
+});
+
+
+// =================== Index route ===============
+app.get("/listings", async(req,res) => {
+  let allListings = await Listing.find({});
+  
+  res.render("listings.ejs", {allListings});
+});
+
+
+// ================== Show route ================
+app.get("/listings/:id", async(req,res) => {
+  let {id} = req.params;
+
+  let listing = await Listing.findById(id);
+
+  res.render("show.ejs", {listing});
 });

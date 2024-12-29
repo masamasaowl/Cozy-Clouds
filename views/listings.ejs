@@ -25,17 +25,22 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <div class="navbar"></div>
     <h2 class="poppins-semibold">
-        Welcome to 
-        <h1 class="poppins-semibold">
-            Cozy Clouds!
-        </h1>
+        Our available listings
     </h2>
-    <p class="poppins-regular">here are all the available lodges</p>
 
-    <button class="book poppins-regular">Book now!</button>
-    <button class="sub">Submit</button>
+    <ul>
+        <% for(let listing of allListings){ %> 
+            <li class="poppins-regular">
+                <a href="/listings/<%= listing._id %>">
+                    <%= listing.title %>
+                </a>
+            </li>   
+        <% } %>
+    </ul>
+
+
+
 
 
 

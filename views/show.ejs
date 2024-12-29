@@ -25,18 +25,22 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <div class="navbar"></div>
     <h2 class="poppins-semibold">
-        Welcome to 
-        <h1 class="poppins-semibold">
-            Cozy Clouds!
-        </h1>
+        Here is a detailed view of the listing
     </h2>
-    <p class="poppins-regular">here are all the available lodges</p>
 
-    <button class="book poppins-regular">Book now!</button>
-    <button class="sub">Submit</button>
+    <p>your id is : <%= listing._id %></p>
+    <p><%= listing.title %></p>
+    <p><%= listing.description %></p>
 
+    <!-- for price  we use symbols -->
+    <p>&#8377;<%= listing.price.toLocaleString("en-IN") %></p>
+    <p><%= listing.location %></p>
+    <p><%= listing.country %></p>
+    
+    
+
+    
 
 
     <footer class="poppins-regular">

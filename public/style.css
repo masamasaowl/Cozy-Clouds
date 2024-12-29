@@ -1,8 +1,32 @@
-/* Primary: Soft Sky Blue (#A0DFF7)
-Accent: Pale Peach (#FFD1BA)
-Background: Whisper White (#F9FAFC)
-Text: Charcoal Gray (#333333)
-Buttons/Highlights: Warm Yellow (#FFD580) */
+/* ============ color palettes ========= */
+/* Primary: Soft Coral (#FF5A5F)
+Secondary: Cool Teal (#00A699)
+Neutral: Warm Gray (#767676) and Off-White (#F7F7F7)
+Accent: Soft Yellow (#FFD64D)
+*/
+
+
+/* ============ fonts =========== */
+.poppins-regular {
+    font-family: "Poppins", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+  
+.poppins-medium {
+    font-family: "Poppins", serif;
+    font-weight: 500;
+    font-style: normal;
+}
+  
+.poppins-semibold {
+    font-family: "Poppins", serif;
+    font-weight: 600;
+    font-style: normal;
+}
+/* =============================== */
+
+
 *{
     margin: 0;
     padding: 0;
@@ -10,35 +34,31 @@ Buttons/Highlights: Warm Yellow (#FFD580) */
     border: border-box;
 }
 body{
-    background-color:#F9FAFC ;
+    background-color:#F7F7F7 ;
 }
-.poppins-light {
-    font-family: "Poppins", serif;
-    font-weight: 300;
-    font-style: normal;
+button{
+    background-color:#FF5A5F ;
 }
-.lora {
-  font-family: "Lora", serif;
-  font-optical-sizing: auto;
-  font-weight: 600;
-  font-style: italic;
-}
-.navbar{
-    background-color: #A0DFF7;
-    height: 60px;
-}
-.book{
-    background-color: #FFD580;
-    color:#333333 ;
-}
-.book:hover{
-    background-color: #FFD1BA;
+button:hover{
+    background-color:#E04B51 ;
 }
 h1{
-    color: #333333;
+    color: #FF5A5F;
+}
+.navbar{
+    height: 45px;
 }
 
-.sub{
-    background-color: #FFD580;
-    color:#333333 ;
+
+
+/* footer */
+footer{
+    width: 100%;
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    background-color: #1E293B;
+    color: white;
 }
