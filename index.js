@@ -61,6 +61,7 @@ app.get("/", (req,res) => {
 
 
 // =================== Index route ===============
+// showcase all the lisitngs
 app.get("/listings", async(req,res) => {
   let allListings = await Listing.find({});
   
@@ -69,10 +70,24 @@ app.get("/listings", async(req,res) => {
 
 
 // ================== Show route ================
-app.get("/listings/:id", async(req,res) => {
+// Read operation to view the listing in detail
+app.get("/listings/show/:id", async(req,res) => {
   let {id} = req.params;
 
   let listing = await Listing.findById(id);
 
   res.render("show.ejs", {listing});
+});
+
+
+// =================== Create route ==============
+// a form to accept the details
+app.get("/listings/new", (req,res) => {
+  res.render("newListing");
+});
+
+// a post request to make changes 
+app.post("/listings", (re,res) => {
+  res.send("the changes have beeen saved");
+
 });

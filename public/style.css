@@ -5,7 +5,6 @@ Neutral: Warm Gray (#767676) and Off-White (#F7F7F7)
 Accent: Soft Yellow (#FFD64D)
 */
 
-
 /* ============ fonts =========== */
 .poppins-regular {
     font-family: "Poppins", serif;
@@ -37,19 +36,50 @@ body{
     background-color:#F7F7F7 ;
 }
 button{
-    background-color:#FF5A5F ;
+    background-color:#FF5A5F;
+    padding: 4px;
+    border-radius: 7px;
+    color: #F7F7F7;
+    border: 2px solid #212529;
 }
 button:hover{
     background-color:#E04B51 ;
+    color: #212529;
 }
 h1{
     color: #FF5A5F;
 }
-.navbar{
-    height: 45px;
+h2{
+    margin-left: 50px;
 }
 
 
+/* ================= newListings.ejs =========== */
+.createForm{
+    display: inline-block;
+    height: 100px;
+    margin-left: 50px;
+    margin-top: 35px;
+}
+.createForm input{
+    display: block;
+    height: 30px;
+    width: 300px;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    border-radius: 7px;
+    padding: 7px;
+    color: #0d0d11e5;
+}
+.createForm textarea{
+    height: 100px;
+    display: block;
+    width: 500px;
+    margin-top: 10px;
+    padding: 7px;
+    color: #0d0d11e5;
+    border-radius: 7px;
+}
 
 /* footer */
 footer{

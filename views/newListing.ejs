@@ -23,30 +23,30 @@
 
     <!-- stylsheet -->
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/styleForNew.css">
 </head>
 <body>
-    <div class="navbar"></div>
     <h2 class="poppins-semibold">
-        Welcome to 
-        <h1 class="poppins-semibold">
-            Cozy Clouds!
-        </h1>
+        We would love to add your place to our listings
     </h2>
-    <p class="poppins-regular">here are all the available lodges</p>
 
-    <form method="get" action="/listings">
-        <button type="submit" class=" poppins-regular">All listings</button>
-    
+
+    <form class="createForm" method="post" action="/listings">
+        <input type="text" name="title" placeholder="Name of listing">
+
+        <textarea type="text" name="description" placeholder="description"></textarea>
+
+        <input type="number" name="price" placeholder="price in INR">
+
+        <input type="text" name="location" placeholder="Location">
+
+        <input type="text" name="country" placeholder="Country">
+
+        <button type="submit" class="Createbtn">Create chat</button>
     </form>
-    <br>
-    <form method="get" action="/listings/new">
-        <button type="submit" class="book poppins-regular">New listing!</button>
-    </form>
-
-
 
     
-
+    
 
 
     <footer class="poppins-regular">
