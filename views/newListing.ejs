@@ -32,17 +32,16 @@
 
 
     <form class="createForm" method="post" action="/listings">
-        <input type="text" name="title" placeholder="Name of listing">
+        <input type="text" name="listing[title]" placeholder="Name of listing">
 
-        <textarea type="text" name="description" placeholder="description"></textarea>
+        <textarea type="text" name="listing[description]" placeholder="description"></textarea>
 
-        <input type="number" name="price" placeholder="price in INR">
+        <input type="number" name="listing[price]" placeholder="price in INR">
+        <input type="text" name="listing[location]" placeholder="Location">
 
-        <input type="text" name="location" placeholder="Location">
+        <input type="text" name="listing[country]" placeholder="Country">
 
-        <input type="text" name="country" placeholder="Country">
-
-        <button type="submit" class="Createbtn">Create chat</button>
+        <button type="submit" class="Createbtn">Create</button>
     </form>
 
     

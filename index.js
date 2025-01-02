@@ -87,7 +87,50 @@ app.get("/listings/new", (req,res) => {
 });
 
 // a post request to make changes 
-app.post("/listings", (re,res) => {
-  res.send("the changes have beeen saved");
+app.post("/listings", async(req,res) => {
+  // let {title,location} = req.body;
 
+  // instead we store the listing object which has all the values 
+  let listing = req.body.listing;
+
+  // directly parse into the collection
+  let newListing = new Listing(listing);
+  await newListing.save();
+
+  console.log(newListing);
+
+  res.redirect("/listings");
+});
+
+
+// ================= Update route ===============
+// update form
+app.get("/listings/edit/:id", async(req,res) => {
+  // extract id
+  let {id} = req.params;
+
+  let listing = await Listing.findById(id);
+
+  res.render("edit.ejs", {listing});
+});
+
+app.put("/listings/:id", async(req,res) => {
+  // extract id
+  let {id} = req.params;
+  
+
+  // let listing = req.body.listing;
+  // intead of this we can be more direct and use our concept of destructuring
+
+  let updatedLisitng = await Listing.findByIdAndUpdate(
+
+    id,
+    {...req.body.listing},
+    {runValidators: true, new: true},
+
+  );
+  // what this does is the lisitng object it 
+
+  console.log(updatedLisitng);
+  res.redirect(`/listings/show/${id}`);
 });

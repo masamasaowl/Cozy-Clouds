@@ -25,24 +25,34 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+
     <h2 class="poppins-semibold">
         Here is a detailed view of the listing
     </h2>
 
-    <p>your id is : <%= listing._id %></p>
-    <p><%= listing.title %></p>
-    <p><%= listing.description %></p>
+    <div class="container">
+        <p>your id is : <%= listing._id %></p>
+        <p><%= listing.title %></p>
+        <p><%= listing.description %></p>
 
-    <!-- for price  we use symbols -->
-    <p>&#8377;<%= listing.price.toLocaleString("en-IN") %></p>
-    <p><%= listing.location %></p>
-    <p><%= listing.country %></p>
+        <!-- for price  we use symbols -->
+        <p>&#8377;<%= listing.price.toLocaleString("en-IN") %></p>
+        <p><%= listing.location %></p>
+        <p><%= listing.country %></p>
+    </div>
+
+    <div class="editListing">
+        <form class="" method="get" action="/listings/edit/<%= listing._id %>">
+
+            <button type="submit" class=" poppins-regular">Edit listing</button>
+
+        </form>
+    </div>
+
     
     
-
     
-
-
+    
     <footer class="poppins-regular">
         <p>Created with <i class="fa-solid fa-heart"></i> & kind help of Shraddha ma'am</p>
     </footer>

@@ -23,27 +23,30 @@
 
     <!-- stylsheet -->
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/styleForNew.css">
 </head>
 <body>
     <h2 class="poppins-semibold">
-        Our available listings
+        It's okay, we all do mistakes sometimes
     </h2>
 
-    <ul>
-        <% for(let listing of allListings){ %> 
-            <li class="poppins-regular">
 
-                <a href="/listings/show/<%= listing._id %>">
-                    <%= listing.title %>
-                </a>
+    <form class="createForm" method="post" action="/listings/<%= listing._id %>?_method=PUT">
+        <input type="text" name="listing[title]" placeholder="Name of listing" value="<%= listing.title %>">
 
-            </li>   
-        <% } %>
-    </ul>
+        <textarea type="text" name="listing[description]" placeholder="description"><%= listing.description %></textarea>
 
+        <input type="number" name="listing[price]" placeholder="price in INR" value="<%= listing.price %>">
 
+        <input type="text" name="listing[location]" placeholder="Location" value="<%= listing.location %>">
 
+        <input type="text" name="listing[country]" placeholder="Country" value="<%= listing.country %>">
 
+        <button type="submit" class="Createbtn">Update!</button>
+    </form>
+
+    
+    
 
 
     <footer class="poppins-regular">
