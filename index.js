@@ -7,12 +7,13 @@ const methodOverride = require ("method-override");
 const path = require("path");
 const mongoose = require('mongoose');
 // run command to start mongosh
-// sudo mongod --dbpath=/Users/Alok/data/db
+// brew services start mongodb-community@8.0
+
 
 // mongoDB setup
 main()
     .then(() => {
-    console.log("connnection successful");
+    console.log("connection successful");
     })
     .catch(err => console.log(err));
 
@@ -51,7 +52,7 @@ app.listen(port, () => {
 
 //     await sampleListing.save();
 //     console.log("sample was saved");
-//     res.send("succesful");
+//     res.send("successful");
 // });
 
 // =================== Home Page =================
@@ -61,7 +62,7 @@ app.get("/", (req,res) => {
 
 
 // =================== Index route ===============
-// showcase all the lisitngs
+// showcase all the listings
 app.get("/listings", async(req,res) => {
   let allListings = await Listing.find({});
   
@@ -120,17 +121,16 @@ app.put("/listings/:id", async(req,res) => {
   
 
   // let listing = req.body.listing;
-  // intead of this we can be more direct and use our concept of destructuring
+  // intend of this we can be more direct and use our concept of destructuring
 
-  let updatedLisitng = await Listing.findByIdAndUpdate(
+  let updatedListing = await Listing.findByIdAndUpdate(
 
     id,
     {...req.body.listing},
     {runValidators: true, new: true},
-
   );
-  // what this does is the lisitng object it 
+  // what this does is the listing object it 
 
-  console.log(updatedLisitng);
+  console.log(updatedListing);
   res.redirect(`/listings/show/${id}`);
 });

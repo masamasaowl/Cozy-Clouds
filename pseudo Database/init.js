@@ -2,11 +2,10 @@
 const mongoose = require("mongoose");
 const initData = require("./data.js");
 const Listing = require("../models/listing.js");
-const data = require("./data.js");
 
 main()
     .then(() => {
-    console.log("connnection successful");
+    console.log("connection successful");
     })
     .catch(err => console.log(err));
 
