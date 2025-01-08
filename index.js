@@ -104,7 +104,7 @@ app.post("/listings", async(req,res) => {
 });
 
 
-// ================= Update route ===============
+// ============== Update route ============
 // update form
 app.get("/listings/edit/:id", async(req,res) => {
   // extract id
@@ -129,8 +129,19 @@ app.put("/listings/:id", async(req,res) => {
     {...req.body.listing},
     {runValidators: true, new: true},
   );
-  // what this does is the listing object it 
+  // what this does is the listing object it is deconstructed and the value is stored directly 
 
   console.log(updatedListing);
   res.redirect(`/listings/show/${id}`);
+});
+
+
+// ============== Delete route ===============
+app.delete("/listings/delete/:id", async(req,res) => {
+  let {id} = req.params;
+
+  let deletedListing = await Listing.findByIdAndDelete(id);
+
+  console.log(deletedListing);
+  res.redirect("/listings");
 });
