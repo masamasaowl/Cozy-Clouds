@@ -5,6 +5,9 @@ const app = express();
 const port = 8080;
 const methodOverride = require ("method-override");
 const path = require("path");
+
+// ejs-mate
+const ejsMate = require ("ejs-mate");
 const mongoose = require('mongoose');
 // run command to start mongosh
 // brew services start mongodb-community@8.0
@@ -29,10 +32,13 @@ app.use(methodOverride("_method"));
 app.use(express.urlencoded({extended : true}));
 
 app.set("view engine", "ejs");
+
+app.engine("ejs", ejsMate);
+
 app.set("views", path.join(__dirname, "views"));
 
 app.set(express.static(path.join(__dirname, "public")));
-app.use(express.static('public'));
+app.use('/static', express.static('public'));
 
 
 app.listen(port, () => {
