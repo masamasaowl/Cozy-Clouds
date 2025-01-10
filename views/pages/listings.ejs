@@ -1,7 +1,7 @@
-<% layout("/layouts/boilerplate") %>
+<% layout("../layouts/boilerplate.ejs") %>
 
 <body>
-    <h2 class="poppins-semibold">
+    <h2 class="poppins-regular">
         Our available listings
     </h2>
 
@@ -9,7 +9,7 @@
         <% for(let listing of allListings){ %> 
             <li class="poppins-regular">
 
-                <a href="/listings/show/<%= listing._id %>">
+                <a class="listingTitle" href="/listings/show/<%= listing._id %>">
                     <%= listing.title %>
                 </a>
 

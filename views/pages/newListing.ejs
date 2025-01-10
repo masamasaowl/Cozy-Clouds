@@ -1,0 +1,24 @@
+<% layout("../layouts/boilerplate.ejs") %>
+
+<body>
+    <h2 class="poppins-regular">
+        We would love to add your place to our listings
+    </h2>
+
+
+    <form class="createForm" method="post" action="/listings">
+        <input class=" poppins-regular" type="text" name="listing[title]" placeholder="Name of listing">
+
+        <textarea class=" poppins-regular" type="text" name="listing[description]" placeholder="description"></textarea>
+
+        <input class=" poppins-regular" type="number" name="listing[price]" placeholder="price in INR">
+
+        <input class=" poppins-regular" type="text" name="listing[location]" placeholder="Location">
+
+        <input class=" poppins-regular" type="text" name="listing[country]" placeholder="Country">
+
+        <button type="submit" class="poppins-regular Createbtn">Create</button>
+    </form>
+
+    
+</body>

@@ -34,23 +34,23 @@ Accent: Soft Yellow (#FFD64D)
 }
 body{
     background-color:#F7F7F7 ;
+    
 }
 button{
-    background-color:#FF5A5F;
+    background-color: #F7F7F7 ;
     padding: 4px;
     border-radius: 7px;
-    color: #F7F7F7;
-    border: 2px solid #212529;
+    color: #FF5A5F;
+    border: 2px solid #1E293B;
+    font-size: 1.2rem;
+    
 }
 button:hover{
-    background-color:#E04B51 ;
-    color: #212529;
+    background-color: #FF5A5F ;
+    color: #F7F7F7; 
 }
 h1{
     color: #FF5A5F;
-}
-h2{
-    margin-left: 50px;
 }
 .editListing{
     margin: 4px 0 6px 10px;
@@ -60,7 +60,25 @@ h2{
 }
 
 
-/* ================= newListings.ejs =========== */
+/* ============= boilerplate.ejs ========== */
+.title{
+    text-align: center;
+}
+.container{
+    margin: 50px;
+}
+
+/* ============= listing.ejs ============== */
+.listingTitle{
+    text-decoration: none;
+    color: black;
+}
+.listingTitle:hover{
+    /* font-size: 1.1rem; */
+    color: #FF5A5F;
+}
+
+/* ============= newListings.ejs =========== */
 .createForm{
     display: inline-block;
     height: 100px;
@@ -87,7 +105,8 @@ h2{
     border-radius: 7px;
 }
 
-/* footer */
+
+/* =============== footer =============== */
 footer{
     width: 100%;
     margin-top: 40px;

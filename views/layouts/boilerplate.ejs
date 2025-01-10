@@ -22,19 +22,33 @@
 
 
     <!-- stylsheet -->
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    <h1 class="poppins-semibold">
+
+    <%- include('../includes/navbar.ejs') %>
+
+    <h1 class="poppins-semibold title">
         Cozy Clouds
     </h1>
 
 
-    <%- body %>
-
+    <div class="container">
+        <%- body %>
+    </div>
+    
     
     <footer class="poppins-regular">
         <p>Created with <i class="fa-solid fa-heart"></i> & kind help of Shraddha ma'am</p>
     </footer>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+
+    <!-- JS -->
+     <script src="/static/js/script.js"></script>
+</body>
 </body>
 </html>

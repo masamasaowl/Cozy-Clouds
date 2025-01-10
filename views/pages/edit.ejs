@@ -1,0 +1,25 @@
+<% layout("../layouts/boilerplate.ejs") %>
+
+<body>
+    <h2 class="poppins-regular">
+        It's okay, we all do mistakes sometimes
+    </h2>
+
+
+    <form class="createForm" method="post" action="/listings/<%= listing._id %>?_method=PUT">
+        <input class=" poppins-regular" type="text" name="listing[title]" placeholder="Name of listing" value="<%= listing.title %>">
+
+        <textarea class=" poppins-regular" type="text" name="listing[description]" placeholder="description"><%= listing.description %></textarea>
+
+        <input class=" poppins-regular" type="number" name="listing[price]" placeholder="price in INR" value="<%= listing.price %>">
+
+        <input class=" poppins-regular" type="text" name="listing[location]" placeholder="Location" value="<%= listing.location %>">
+
+        <input class=" poppins-regular" type="text" name="listing[country]" placeholder="Country" value="<%= listing.country %>">
+
+        <button type="submit" class="poppins-regular Createbtn">Update!</button>
+    </form>
+
+    
+
+</body>

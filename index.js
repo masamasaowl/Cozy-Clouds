@@ -35,11 +35,11 @@ app.set("view engine", "ejs");
 
 app.engine("ejs", ejsMate);
 
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "views/pages"));
 
 app.set(express.static(path.join(__dirname, "public")));
-app.use('/static', express.static('public'));
 
+app.use('/static', express.static('public'));
 
 app.listen(port, () => {
     console.log("App is listening on port : 8080")
