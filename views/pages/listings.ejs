@@ -5,15 +5,35 @@
         Our available listings
     </h2>
 
-    <ul>
+
+
+    <ul class="listingContainer">
         <% for(let listing of allListings){ %> 
-            <li class="poppins-regular">
-
-                <a class="listingTitle" href="/listings/show/<%= listing._id %>">
-                    <%= listing.title %>
-                </a>
-
-            </li>   
+            <div class="row">
+                
+                <div class="" >
+                    <a class="" href="/listings/show/<%= listing._id %>">
+    
+                        <img src="<%= listing.image.url %>" class="card-img-top" alt="listing image">
+                        
+                    </a>
+                    
+                </div>
+    
+    
+                <li class="listOfTitles">
+    
+                    <a class="poppins-regular listingTitle" href="/listings/show/<%= listing._id %>">
+                        <%= listing.title %>
+                    </a>
+    
+                    <br>
+    
+                    <p class="poppins-regular listingPrice" >&#8377;<%= listing.price.toLocaleString("en-IN") %> <p class="night">night</p></p>
+    
+                </li>   
+            </div>
+            
         <% } %>
     </ul>
 
