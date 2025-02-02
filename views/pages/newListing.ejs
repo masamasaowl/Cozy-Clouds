@@ -1,23 +1,32 @@
 <% layout("../layouts/boilerplate.ejs") %>
 
 <body>
-    <h2 class="poppins-regular">
-        We would love to add your place to our travel destinations
+    <h2 class="newListings-title poppins-regular">
+        We would love to add your place <br> to our travel destinations
     </h2>
 
 
     <form class="createForm" method="post" action="/listings">
-        <input class=" poppins-regular" type="text" name="listing[title]" placeholder="Name of listing">
+        <p>Title</p>
+        <input class="inputBox poppins-regular" type="text" name="listing[title]" placeholder="Name of listing">
 
+        <p>Description</p>
         <textarea class=" poppins-regular" type="text" name="listing[description]" placeholder="description"></textarea>
 
+        <p>Image link</p>
+        <input class=" poppins-regular" type="text" name="listing[price]" placeholder="Enter the Image Link">
+
+
+        <p>Price</p>
         <input class=" poppins-regular" type="number" name="listing[price]" placeholder="price in INR">
 
-        <input class=" poppins-regular" type="text" name="listing[location]" placeholder="Location">
+        <p>Location</p>
+        <input class=" poppins-regular" type="text" name="listing[location]" placeholder=" Enter location">
 
-        <input class=" poppins-regular" type="text" name="listing[country]" placeholder="Country">
+        <p>Country</p>
+        <input class=" poppins-regular" type="text" name="listing[country]" placeholder="Enter country">
 
-        <button type="submit" class="poppins-regular Createbtn">Create</button>
+        <button type="submit" class="poppins-regular createBtn">Create</button>
     </form>
 
     

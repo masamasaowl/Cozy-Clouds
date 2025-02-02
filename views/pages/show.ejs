@@ -2,11 +2,15 @@
 
 <body>
 
-    <h2 class="poppins-regular">
+    <h2 class="newListings-title poppins-regular">
         Here is a detailed view of the listing
     </h2>
 
-    <div class="container">
+    <div class="showImage">
+        <img class="image" src="<%= listing.image.url %>" alt="listing image">
+    </div>
+
+    <div class="showContainer">
         <p class=" poppins-regular" >your id is : <%= listing._id %></p>
 
         <p class=" poppins-regular" ><%= listing.title %></p>
@@ -25,7 +29,6 @@
         <form method="get" action="/listings/edit/<%= listing._id %>">
 
             <button type="submit" class=" poppins-regular">Edit listing</button>
-
         </form>
     </div>
 
@@ -33,7 +36,6 @@
         <form method="post" action="/listings/delete/<%= listing._id %>?_method=DELETE">
 
             <button type="submit" class=" poppins-regular">Delete listing</button>
-
         </form>
     </div>
 

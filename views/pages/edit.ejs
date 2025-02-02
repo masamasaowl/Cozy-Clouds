@@ -1,23 +1,32 @@
 <% layout("../layouts/boilerplate.ejs") %>
 
 <body>
-    <h2 class="poppins-regular">
+    <h2 class="newListings-title poppins-regular">
         It's okay, we all do mistakes sometimes
     </h2>
 
 
     <form class="createForm" method="post" action="/listings/<%= listing._id %>?_method=PUT">
+
+        <p>Title</p>
         <input class=" poppins-regular" type="text" name="listing[title]" placeholder="Name of listing" value="<%= listing.title %>">
 
+        <p>Description</p>
         <textarea class=" poppins-regular" type="text" name="listing[description]" placeholder="description"><%= listing.description %></textarea>
 
-        <input class=" poppins-regular" type="number" name="listing[price]" placeholder="price in INR" value="<%= listing.price %>">
+        <p>Image link</p>
+        <input class=" poppins-regular" type="text" name="listing[price]" placeholder="Enter the new image link">
 
+        <p>Price</p>
+        <input class=" poppins-regular" type="number" name="listing[price]" placeholder="price in INR" value="<%= listing.price %>">
+        
+        <p>Location</p>
         <input class=" poppins-regular" type="text" name="listing[location]" placeholder="Location" value="<%= listing.location %>">
 
+        <p>Country</p>
         <input class=" poppins-regular" type="text" name="listing[country]" placeholder="Country" value="<%= listing.country %>">
 
-        <button type="submit" class="poppins-regular Createbtn">Update!</button>
+        <button type="submit" class="poppins-regular createBtn">Update!</button>
     </form>
 
     
