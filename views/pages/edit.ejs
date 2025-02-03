@@ -6,25 +6,25 @@
     </h2>
 
 
-    <form class="createForm" method="post" action="/listings/<%= listing._id %>?_method=PUT">
-
+    <form class="createForm" method="post" action="/listings/<%= listing._id %>?_method=PUT" novalidate>
+        
         <p>Title</p>
-        <input class=" poppins-regular" type="text" name="listing[title]" placeholder="Name of listing" value="<%= listing.title %>">
+        <input class=" poppins-regular" type="text" name="listing[title]" placeholder="Name of listing" value="<%= listing.title %>" required>
 
         <p>Description</p>
-        <textarea class=" poppins-regular" type="text" name="listing[description]" placeholder="description"><%= listing.description %></textarea>
+        <textarea class=" poppins-regular" type="text" name="listing[description]" placeholder="description" required ><%= listing.description %> </textarea>
 
         <p>Image link</p>
         <input class=" poppins-regular" type="text" name="listing[price]" placeholder="Enter the new image link">
 
         <p>Price</p>
-        <input class=" poppins-regular" type="number" name="listing[price]" placeholder="price in INR" value="<%= listing.price %>">
+        <input class=" poppins-regular" type="number" name="listing[price]" placeholder="price in INR" value="<%= listing.price %>" required >
         
         <p>Location</p>
-        <input class=" poppins-regular" type="text" name="listing[location]" placeholder="Location" value="<%= listing.location %>">
+        <input class=" poppins-regular" type="text" name="listing[location]" placeholder="Location" value="<%= listing.location %>" required>
 
         <p>Country</p>
-        <input class=" poppins-regular" type="text" name="listing[country]" placeholder="Country" value="<%= listing.country %>">
+        <input class=" poppins-regular" type="text" name="listing[country]" placeholder="Country" value="<%= listing.country %>" required >
 
         <button type="submit" class="poppins-regular createBtn">Update!</button>
     </form>

@@ -6,12 +6,17 @@ const port = 8080;
 const methodOverride = require ("method-override");
 const path = require("path");
 
+// require wrapAsync
+const wrapAsync = require("./utils/wrapAsync.js");
+
+// custom error class
+const ExpressError = require("./utils/ExpressError.js");
+
 // ejs-mate
 const ejsMate = require ("ejs-mate");
-const mongoose = require('mongoose');
-// run command to start mongosh
-// brew services start mongodb-community@8.0
 
+// mongoose
+const mongoose = require('mongoose');
 
 // mongoDB setup
 main()
@@ -61,6 +66,7 @@ app.listen(port, () => {
 //     res.send("successful");
 // });
 
+
 // =================== Home Page =================
 app.get("/", (req,res) => {
   res.render("home.ejs");
@@ -69,22 +75,22 @@ app.get("/", (req,res) => {
 
 // =================== Index route ===============
 // showcase all the listings
-app.get("/listings", async(req,res) => {
+app.get("/listings",wrapAsync(async(req,res) => {
+
   let allListings = await Listing.find({});
-  
   res.render("listings.ejs", {allListings});
-});
+}));
 
 
 // ================== Show route ================
 // Read operation to view the listing in detail
-app.get("/listings/show/:id", async(req,res) => {
+app.get("/listings/show/:id",wrapAsync(async(req,res) => {
   let {id} = req.params;
 
   let listing = await Listing.findById(id);
 
   res.render("show.ejs", {listing});
-});
+})); 
 
 
 // =================== Create route ==============
@@ -94,7 +100,7 @@ app.get("/listings/new", (req,res) => {
 });
 
 // a post request to make changes 
-app.post("/listings", async(req,res) => {
+app.post("/listings", wrapAsync(async(req,res) => {
   // let {title,location} = req.body;
 
   // instead we store the listing object which has all the values 
@@ -107,21 +113,20 @@ app.post("/listings", async(req,res) => {
   console.log(newListing);
 
   res.redirect("/listings");
-});
-
+}));
 
 // ============== Update route ============
 // update form
-app.get("/listings/edit/:id", async(req,res) => {
+app.get("/listings/edit/:id",wrapAsync(async(req,res) => {
   // extract id
   let {id} = req.params;
 
   let listing = await Listing.findById(id);
 
   res.render("edit.ejs", {listing});
-});
+})) ;
 
-app.put("/listings/:id", async(req,res) => {
+app.put("/listings/:id", wrapAsync(async(req,res) => {
   // extract id
   let {id} = req.params;
   
@@ -139,15 +144,32 @@ app.put("/listings/:id", async(req,res) => {
 
   console.log(updatedListing);
   res.redirect(`/listings/show/${id}`);
-});
-
+})); 
 
 // ============== Delete route ===============
-app.delete("/listings/delete/:id", async(req,res) => {
+app.delete("/listings/delete/:id", wrapAsync(async(req,res) => {
   let {id} = req.params;
 
   let deletedListing = await Listing.findByIdAndDelete(id);
 
   console.log(deletedListing);
   res.redirect("/listings");
+})); 
+
+
+
+
+// If an undefined route is entered
+app.all("*", (req, res) => {
+  throw new ExpressError(404,'Page not found');
+});
+
+// ================ Error handling middlewares ================
+app.use((err,req,res,next)=>{
+  // give default values to status and message
+  let {statusCode = 500, message = "An Unknown error seems to have been occurred", name} = err;
+  
+  console.log(err.stack);
+  res.status(statusCode).render("error.ejs", {statusCode, message, name})
+  // res.status(statusCode).send(message);
 });

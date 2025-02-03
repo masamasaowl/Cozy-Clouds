@@ -86,6 +86,11 @@ h1{
 }
 
 /* ============= listing.ejs ============== */
+.listingContainer{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 3rem 20px;
+}
 .listingTitle{
     text-decoration: none;
     color: black;
@@ -107,27 +112,16 @@ h1{
 .listOfTitles{
     display: inline;
 }
+.imageContainer{
+    display: inline-block;
+}
 .card-img-top{
     height: 240px;
     width: 255px;
     border-radius: 10px;
+    object-fit: cover;
 }
-.listingContainer{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    margin: 3rem 20px;
-}
-.imageContainer{
-    display: inline-block;
-}
-.imageContainer .overlay{
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 100;
-}
-.imageContainer:hover .overlay{
-    opacity: 1;
-}
+
 
 /* ============= newListings.ejs =========== */
 .newListings-title{
@@ -170,20 +164,45 @@ h1{
 
 
 /* ================ Show.ejs ================== */
-.showImage{
+.showContainer{
     width: 65%;
     margin: auto;
-    height: 480px;
-    border-radius: 25px;
-    margin-top: 0;
-
 }
-.image{
-    height: 100%;
+.show-title{
+    width: 65%;
+    margin: auto;
+    margin-top: 2rem;
+}
+.showImgContainer{
+    display: inline-block;
     width: 100%;
-    object-fit: contain;
-    
+    margin: auto;
+    margin-top: 1.5rem;
 }
+.showImg{
+    height: 420px;
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+}
+.showTextContainer{
+    margin-top: 1.5rem;
+}
+
+/* =============== Error.ejs =============== */
+.errorContainer{
+    width: 60%;
+    margin: auto;
+}
+.errorName{
+    color: #1E293B;
+    font-size: 3rem;
+}
+.statusCode{
+    color: #FF5A5F;
+    font-size: 2rem;
+}
+
 
 /* =============== footer =============== */
 footer{

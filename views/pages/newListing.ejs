@@ -6,25 +6,25 @@
     </h2>
 
 
-    <form class="createForm" method="post" action="/listings">
+    <form class="createForm" method="post" action="/listings" novalidate>
         <p>Title</p>
-        <input class="inputBox poppins-regular" type="text" name="listing[title]" placeholder="Name of listing">
+        <input class="inputBox poppins-regular" type="text" name="listing[title]" placeholder="Name of listing" required>
 
         <p>Description</p>
-        <textarea class=" poppins-regular" type="text" name="listing[description]" placeholder="description"></textarea>
+        <textarea class=" poppins-regular" type="text" name="listing[description]" placeholder="description" required></textarea>
 
         <p>Image link</p>
         <input class=" poppins-regular" type="text" name="listing[price]" placeholder="Enter the Image Link">
 
 
         <p>Price</p>
-        <input class=" poppins-regular" type="number" name="listing[price]" placeholder="price in INR">
+        <input class=" poppins-regular"  name="listing[price]" placeholder="price in INR" required>
 
         <p>Location</p>
-        <input class=" poppins-regular" type="text" name="listing[location]" placeholder=" Enter location">
+        <input class=" poppins-regular" type="text" name="listing[location]" placeholder=" Enter location" required>
 
         <p>Country</p>
-        <input class=" poppins-regular" type="text" name="listing[country]" placeholder="Enter country">
+        <input class=" poppins-regular" type="text" name="listing[country]" placeholder="Enter country" required >
 
         <button type="submit" class="poppins-regular createBtn">Create</button>
     </form>
