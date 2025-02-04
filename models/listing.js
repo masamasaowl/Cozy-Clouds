@@ -12,7 +12,6 @@ const listingSchema = new Schema({
     image : {
         filename: {
             type: String,
-            required: true,
             default: "listing image"
         },
         url: {
@@ -24,7 +23,7 @@ const listingSchema = new Schema({
         },  
     },
     price : {
-        type : Number,
+        type : String,
         required : true
     },
     location : {
