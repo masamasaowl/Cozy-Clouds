@@ -33,6 +33,13 @@ const listingSchema = new Schema({
     country : {
         type : String,
     },
+    // one to few relation between the listing and its reviews
+    review: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Review"
+        }
+    ]
 
 });
 
