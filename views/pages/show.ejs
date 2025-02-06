@@ -36,5 +36,45 @@
             </form>
         </div>
     </div>
+    
+    <hr>
+    
+    <div class="reviewBox">
+        <h4 class="poppins-regular">Leave a review</h4>
 
+        <form method="post" action="/listings/review/<%= listing._id %>">
+            <div class="poppins-regular ratingBox">
+                <label for="rating">Rating
+                </label>
+    
+                <input type="range" min="1" max="5" id="rating" name="review[rating]">
+            </div>
+            
+            <div class="poppins-regular commentBox">
+                <label for="comment">Your thoughts..
+                </label>
+
+                <textarea name="review[comment]" id="comment" rows="4" required></textarea>
+            </div>
+
+            <button type="submit" class="submitBtn">Post</button>
+
+        </form>
+    </div>
+
+    <hr>
+
+        <div class="allReviews hidden">
+            <h5>All reviews</h5>
+            <ul>
+                <% for(review of listing.review){ %>
+                    <li>
+                        <div class="showReviewBox">
+                            <p><%= review.rating %></p>
+                            <p><%= review.comment %></p>
+                        </div>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
 </body>

@@ -13,10 +13,12 @@ const ExpressError = require("./utils/ExpressError.js");
 const ejsMate = require ("ejs-mate");
 // models
 const Listing = require("./models/listing.js");
+const Review = require("./models/review.js");
 // Joi schema
-const {listingSchema} = require("./schema.js");
+const {listingSchema, reviewSchema} = require("./schema.js");
 // mongoose
 const mongoose = require('mongoose');
+
 // mongoDB setup
 main()
     .then(() => {
@@ -43,27 +45,44 @@ app.set(express.static(path.join(__dirname, "public")));
 
 app.use('/static', express.static('public'));
 
-// validate Listing by Joi
-const validateListing = (req,res,next) => {
-  let { error } = listingSchema.validate(req.body);
-
-  // combining the properties and details from the error msg
-  let errMsg = error.details.map((el) => el.message).join(", ");
-
-  if(error){
-    throw new ExpressError(400, errMsg);
-  }else{
-    next();
-  }
-}
-
 app.listen(port, () => {
     console.log("App is listening on port : 8080")
 });
 
 //  =============================================
 
-// ==================== Test document ============
+
+// ============ Server Side Validations =========
+
+// validate Listing by Joi
+const validateListing = (req,res,next) => {
+  let { error } = listingSchema.validate(req.body);
+
+  if(error){
+    // combining the properties and details from the error msg
+    let errMsg = error.details.map((el) => el.message).join(", ");
+
+    throw new ExpressError(400, errMsg);
+  }else{
+    next();
+  }
+};
+
+// server side validation for reviews
+const validateReviews = (req,res,next) => {
+  let { error } = reviewSchema.validate(req.body);
+
+  if(error){
+    let errMsg = error.details.map((el) => el.message).join(", ");
+    throw new ExpressError(400, errMsg);
+  }else{
+    next();
+  }
+};
+
+
+
+// ================ Test document ===============
 // app.get("/testListing", async(req,res) => {
 //     let sampleListing = new Listing ({
 //       title : "The Angkor Wat",
@@ -98,7 +117,7 @@ app.get("/listings",wrapAsync(async(req,res) => {
 app.get("/listings/show/:id",wrapAsync(async(req,res) => {
   let {id} = req.params;
 
-  let listing = await Listing.findById(id);
+  let listing = await Listing.findById(id).populate("review");
 
   res.render("show.ejs", {listing});
 })); 
@@ -172,6 +191,30 @@ app.delete("/listings/delete/:id", wrapAsync(async(req,res) => {
   console.log(deletedListing);
   res.redirect("/listings");
 })); 
+
+// =============================================
+
+
+// ================= REVIEWS ===================
+
+// =============== Create Route =================
+app.post("/listings/review/:id",validateReviews, wrapAsync(async(req,res) => {
+  let id = req.params.id;
+  let listing = await Listing.findById(id).populate("review");
+
+  // extract and store the review object from the form
+  let newReview = new Review(req.body.review)
+
+  // store in the review array of the listing
+  listing.review.push(newReview);
+  console.log(listing);
+
+  await newReview.save();
+  await listing.save();
+
+  console.log(listing.review);
+  res.redirect(`/listings/show/${id}`);
+}));
 
 
 

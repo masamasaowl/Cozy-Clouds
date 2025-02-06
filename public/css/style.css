@@ -161,10 +161,17 @@ h1{
 .createBtn{
     margin: 15px 0;
 }
+#comment{
+    padding: 0.5rem;
+}
+.allReviews{
+    width: 70%;
+    margin: auto;
+}
 
 
 /* ================ Show.ejs ================== */
-.showContainer{
+.showContainer, .reviewBox{
     width: 65%;
     margin: auto;
 }
@@ -187,6 +194,14 @@ h1{
 }
 .showTextContainer{
     margin-top: 1.5rem;
+}
+.commentBox{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+}
+.submitBtn{
+    margin-top: 1rem;
 }
 
 /* =============== Error.ejs =============== */

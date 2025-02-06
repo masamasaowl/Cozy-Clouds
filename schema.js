@@ -12,3 +12,11 @@ module.exports.listingSchema = Joi.object({
 
     }).required()
 });
+
+// schema validation for the reviews
+module.exports.reviewSchema = Joi.object({
+    review: Joi.object({
+        rating: Joi.number(),
+        comment: Joi.string().required()
+    }).required()
+});
