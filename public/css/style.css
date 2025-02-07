@@ -164,14 +164,11 @@ h1{
 #comment{
     padding: 0.5rem;
 }
-.allReviews{
-    width: 70%;
-    margin: auto;
-}
+
 
 
 /* ================ Show.ejs ================== */
-.showContainer, .reviewBox{
+.showContainer, .reviewBox, .reviewsText, .allReviews{
     width: 65%;
     margin: auto;
 }
@@ -203,6 +200,22 @@ h1{
 .submitBtn{
     margin-top: 1rem;
 }
+
+.allReviews{
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 2.5rem;
+    column-gap: 2rem;
+}
+.reviewUsername{
+    font-weight: 700;
+    margin: 0;
+}
+.delReviewBtn{
+    font-size: 0.8rem;
+}
+
 
 /* =============== Error.ejs =============== */
 .errorContainer{
@@ -254,4 +267,11 @@ footer{
     font-size: 1.5rem;
     margin-bottom: 10px;
     padding-left: 4px;
+}
+
+
+
+/* ================ JS classes ================ */
+.hidden{
+    display: none;
 }

@@ -1,0 +1,122 @@
+const express = require("express");
+const router = express.Router();
+// require wrapAsync
+const wrapAsync = require("../utils/wrapAsync.js");
+// custom error class
+const ExpressError = require("../utils/ExpressError.js");
+// model
+const Listing = require("../models/listing.js");
+const Review = require("../models/review.js");
+// Joi schema
+const { listingSchema } = require("../schema.js");
+
+
+
+// validate Listing by Joi
+const validateListing = (req,res,next) => {
+    let { error } = listingSchema.validate(req.body);
+  
+    if(error){
+      // combining the properties and details from the error msg
+      let errMsg = error.details.map((el) => el.message).join(", ");
+  
+      throw new ExpressError(400, errMsg);
+    }else{
+      next();
+    }
+};
+
+
+// =================== Index route ===============
+// showcase all the listings
+router.get("/",wrapAsync(async(req,res) => {
+
+  let allListings = await Listing.find({});
+  res.render("listings.ejs", {allListings});
+}));
+
+
+// ================== Show route ================
+// Read operation to view the listing in detail
+router.get("/show/:id",wrapAsync(async(req,res) => {
+  let {id} = req.params;
+
+  let listing = await Listing.findById(id).populate("review");
+
+  res.render("show.ejs", {listing});
+})); 
+
+
+// =================== Create route ==============
+// a form to accept the details
+router.get("/new", (req,res) => {
+  res.render("newListing");
+});
+
+// a post request to make changes 
+router.post("/",validateListing, wrapAsync(async(req,res,next) => {
+
+  // validate schema using Joi
+  let result = listingSchema.validate(req.body);
+  console.log(result);
+  if(result.error){
+    throw new ExpressError(400, result.error);
+  }
+
+  // let {title,location} = req.body;
+  // instead we store the listing object which has all the values 
+  let listing = req.body.listing;
+
+  // directly parse into the collection
+  let newListing = new Listing(listing);
+  await newListing.save();
+
+  console.log(newListing);
+  res.redirect("/listings");
+}));
+
+
+// ============== Update route ============
+// update form
+router.get("/edit/:id",wrapAsync(async(req,res) => {
+  // extract id
+  let {id} = req.params;
+
+  let listing = await Listing.findById(id);
+
+  res.render("edit.ejs", {listing});
+})) ;
+
+router.put("/:id",validateListing, wrapAsync(async(req,res) => {
+  // extract id
+  let {id} = req.params;
+
+  // let listing = req.body.listing;
+
+  // instead of this we can be more direct and use our concept of destructuring
+  let updatedListing = await Listing.findByIdAndUpdate(
+    id,
+    {...req.body.listing},
+    {runValidators: true, new: true},
+  );
+  // what this does is the listing object it is deconstructed and the value is stored directly 
+
+  console.log(updatedListing);
+  res.redirect(`/listings/show/${id}`);
+})); 
+
+
+// ============== Delete route ===============
+router.delete("/delete/:id", wrapAsync(async(req,res) => {
+  let {id} = req.params;
+
+  let deletedListing = await Listing.findByIdAndDelete(id);
+
+  console.log(deletedListing);
+  res.redirect("/listings");
+})); 
+
+// =============================================
+
+
+module.exports = router;

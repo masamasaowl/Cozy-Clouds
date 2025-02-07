@@ -1,3 +1,5 @@
+console.log("path is working");
+
 // bootstrap logic for validating form entries
 (() => {
     'use strict'

@@ -42,7 +42,7 @@
     <div class="reviewBox">
         <h4 class="poppins-regular">Leave a review</h4>
 
-        <form method="post" action="/listings/review/<%= listing._id %>">
+        <form method="post" action="/listings/<%= listing._id %>/review">
             <div class="poppins-regular ratingBox">
                 <label for="rating">Rating
                 </label>
@@ -63,18 +63,27 @@
     </div>
 
     <hr>
+    <h5 class="reviewsText"><u>Reviews</u></h5>
 
-        <div class="allReviews hidden">
-            <h5>All reviews</h5>
-            <ul>
-                <% for(review of listing.review){ %>
-                    <li>
-                        <div class="showReviewBox">
-                            <p><%= review.rating %></p>
-                            <p><%= review.comment %></p>
-                        </div>
-                    </li>
-                <% } %>
-            </ul>
-        </div>
+    <div class="allReviews">    
+        
+            <% for(review of listing.review){ %>
+                
+                    <div class="showReviewBox">
+                        <p class="reviewUsername">Masamasaowl</p>
+                        <p class="reviewRating"><%= review.rating %> stars</p>
+                        <p class="reviewComment"><%= review.comment %></p>
+
+                        <form method="post" action="/listings/<%= listing._id %>/review/<%= review._id %>?_method=DELETE">
+
+                            <button class="delReviewBtn">Delete</button>
+                        </form>
+                    </div>
+
+                    
+                
+            <% } %>
+    
+    </div>
+       
 </body>
