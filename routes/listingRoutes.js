@@ -55,14 +55,6 @@ router.get("/new", (req,res) => {
 
 // a post request to make changes 
 router.post("/",validateListing, wrapAsync(async(req,res,next) => {
-
-  // validate schema using Joi
-  let result = listingSchema.validate(req.body);
-  console.log(result);
-  if(result.error){
-    throw new ExpressError(400, result.error);
-  }
-
   // let {title,location} = req.body;
   // instead we store the listing object which has all the values 
   let listing = req.body.listing;
@@ -72,6 +64,7 @@ router.post("/",validateListing, wrapAsync(async(req,res,next) => {
   await newListing.save();
 
   console.log(newListing);
+  req.flash("success", "New listing was created!");
   res.redirect("/listings");
 }));
 

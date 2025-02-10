@@ -12,6 +12,10 @@ const path = require("path");
 const ExpressError = require("./utils/ExpressError.js");
 // ejs-mate
 const ejsMate = require ("ejs-mate");
+// express-session
+const session = require("express-session");
+// flash
+const flash = require("connect-flash");
 // mongoose
 const mongoose = require('mongoose');
 
@@ -25,6 +29,20 @@ async function main() {
   await mongoose.connect('mongodb://127.0.0.1:27017/cozyClouds');
 };
 
+// sessions
+const sessionOptions = {
+  secret: 'mySuperSecret',
+  resave: false,
+  saveUninitialized: true,
+}
+app.use(session(sessionOptions));
+
+// flash
+app.use(flash());
+app.use((req,res,next) => {
+  res.locals.success = req.flash("success")
+  next()
+});
 
 // Request-Middlewares
 app.use(methodOverride("_method"));
