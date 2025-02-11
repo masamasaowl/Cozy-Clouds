@@ -43,6 +43,11 @@ router.get("/show/:id",wrapAsync(async(req,res) => {
 
   let listing = await Listing.findById(id).populate("review");
 
+  // flash message if listing doesn't exist
+  if(!listing){
+    req.flash("error", "The listing you requested for doesn't exist ")
+    res.redirect("/listings")
+  }
   res.render("show.ejs", {listing});
 })); 
 
@@ -77,6 +82,11 @@ router.get("/edit/:id",wrapAsync(async(req,res) => {
 
   let listing = await Listing.findById(id);
 
+  // flash message if listing doesn't exist
+  if(!listing){
+    req.flash("error", "The listing you requested for doesn't exist ")
+    res.redirect("/listings")
+  }
   res.render("edit.ejs", {listing});
 })) ;
 
@@ -95,6 +105,7 @@ router.put("/:id",validateListing, wrapAsync(async(req,res) => {
   // what this does is the listing object it is deconstructed and the value is stored directly 
 
   console.log(updatedListing);
+  req.flash("success", "listing was edited successfully!");
   res.redirect(`/listings/show/${id}`);
 })); 
 
@@ -106,6 +117,7 @@ router.delete("/delete/:id", wrapAsync(async(req,res) => {
   let deletedListing = await Listing.findByIdAndDelete(id);
 
   console.log(deletedListing);
+  req.flash("success", "listing was deleted");
   res.redirect("/listings");
 })); 
 
