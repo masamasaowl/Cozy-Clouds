@@ -32,7 +32,7 @@
         <div class="deleteListing">
             <form method="post" action="/listings/delete/<%= listing._id %>?_method=DELETE">
     
-                <button type="submit" class=" poppins-regular">Delete listing</button>
+                <button type="submit" class="deleteBtn poppins-regular">Delete listing</button>
             </form>
         </div>
     </div>
@@ -76,12 +76,9 @@
 
                         <form method="post" action="/listings/<%= listing._id %>/review/<%= review._id %>?_method=DELETE">
 
-                            <button class="delReviewBtn">Delete</button>
+                            <button class="deleteBtn delReviewBtn">Delete</button>
                         </form>
-                    </div>
-
-                    
-                
+                    </div>     
             <% } %>
     
     </div>

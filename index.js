@@ -4,11 +4,13 @@ let express = require ("express");
 const app = express();
 const port = 8080;
 // require express.Router()
-const listings = require("./routes/listingRoutes.js");
-const reviews = require("./routes/reviewRoutes.js");
-
+const listingRoutes = require("./routes/listingRoutes.js");
+const reviewRoutes = require("./routes/reviewRoutes.js");
+const userRoutes = require("./routes/userRoutes.js");
+// methodOverride
 const methodOverride = require ("method-override");
 const path = require("path");
+// error class
 const ExpressError = require("./utils/ExpressError.js");
 // ejs-mate
 const ejsMate = require ("ejs-mate");
@@ -16,8 +18,13 @@ const ejsMate = require ("ejs-mate");
 const session = require("express-session");
 // flash
 const flash = require("connect-flash");
+// passport
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require('./models/user.js');
 // mongoose
 const mongoose = require('mongoose');
+
 
 // mongoDB setup
 main()
@@ -49,6 +56,14 @@ app.use((req,res,next) => {
   res.locals.error = req.flash("error");
   next();
 });
+
+// passport middlewares
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 // Request-Middlewares
 app.use(methodOverride("_method"));
@@ -87,18 +102,19 @@ app.listen(port, () => {
 // });
 
 
-// =================== Home Routes =================
+// Home Routes
 app.get("/", (req,res) => {
   res.render("home.ejs");
 });
 
-// ================== Listings Routes ===============
-app.use("/listings", listings);
+// Listings Routes 
+app.use("/listings", listingRoutes);
 
+// Reviews Routes
+app.use("/listings/:id/review", reviewRoutes);
 
-// ================== Reviews Routes ===============
-app.use("/listings/:id/review", reviews);
-
+// User Routes
+app.use("/", userRoutes);
 
 
 // ================== Undefined Route ===================

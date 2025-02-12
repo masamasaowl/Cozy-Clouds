@@ -1,4 +1,5 @@
 const express = require("express");
+// with merge params we extract listing id
 const router = express.Router({mergeParams: true});
 // require wrapAsync
 const wrapAsync = require("../utils/wrapAsync.js");
