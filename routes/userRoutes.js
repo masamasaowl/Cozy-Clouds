@@ -27,9 +27,13 @@ router.post("/signup", async(req,res) => {
 });
 
 
-// =================== Signup route ==============
+// =================== Login route ==============
 router.get("/login", (req,res) => {
     res.render("loginForm.ejs");
+});
+
+router.post("/login", async(req,res) => {
+
 });
 
 
