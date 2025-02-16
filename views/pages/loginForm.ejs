@@ -2,14 +2,22 @@
 
 <h2 class="newListings-title poppins-regular">Welcome back! We missed you</h2>
 
-<form class="createForm" method="POST" action="/signup" novalidate>
+<form class="createForm" method="POST" action="/login" novalidate>
 
-    <p>Username</p>
+    <p class="poppins-regular">Username</p>
     <input class="inputBox poppins-regular" type="text" name="username" placeholder="your username" required>
 
-    <p>Password</p>
+    <p class="poppins-regular">Password</p>
     <input class="inputBox poppins-regular" type="password" name="password" placeholder="your password" required>
 
-    <button type="submit" class="poppins-regular createBtn">Sign up!</button>
+    <button type="submit" class="poppins-regular createBtn">Log in!</button>
+    <br>
+    <p class="poppins-regular">Or create your account now!</p>
+    <br>
 
 </form>
+
+<form class="signupBtn" method="get" action="/signup">
+    <button type="submit" class="poppins-regular createBtn">Sign up!</button>
+</form>
+

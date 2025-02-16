@@ -9,6 +9,8 @@ const Listing = require("../models/listing.js");
 const Review = require("../models/review.js");
 // Joi schema
 const { listingSchema } = require("../schema.js");
+// check is user is logged in
+const { isLoggedIn } = require("../middleware.js");
 
 
 
@@ -54,12 +56,12 @@ router.get("/show/:id",wrapAsync(async(req,res) => {
 
 // =================== Create route ==============
 // a form to accept the details
-router.get("/new", (req,res) => {
-  res.render("newListing");
+router.get("/new", isLoggedIn,(req,res) => {
+    res.render("newListing");
 });
 
 // a post request to make changes 
-router.post("/",validateListing, wrapAsync(async(req,res,next) => {
+router.post("/", isLoggedIn, validateListing, wrapAsync(async(req,res,next) => {
   // let {title,location} = req.body;
   // instead we store the listing object which has all the values 
   let listing = req.body.listing;
@@ -76,7 +78,7 @@ router.post("/",validateListing, wrapAsync(async(req,res,next) => {
 
 // ============== Update route ============
 // update form
-router.get("/edit/:id",wrapAsync(async(req,res) => {
+router.get("/edit/:id",isLoggedIn,wrapAsync(async(req,res) => {
   // extract id
   let {id} = req.params;
 
@@ -90,7 +92,7 @@ router.get("/edit/:id",wrapAsync(async(req,res) => {
   res.render("edit.ejs", {listing});
 })) ;
 
-router.put("/:id",validateListing, wrapAsync(async(req,res) => {
+router.put("/:id",isLoggedIn,validateListing, wrapAsync(async(req,res) => {
   // extract id
   let {id} = req.params;
 
@@ -111,7 +113,7 @@ router.put("/:id",validateListing, wrapAsync(async(req,res) => {
 
 
 // ============== Delete route ===============
-router.delete("/delete/:id", wrapAsync(async(req,res) => {
+router.delete("/delete/:id",isLoggedIn, wrapAsync(async(req,res) => {
   let {id} = req.params;
 
   let deletedListing = await Listing.findByIdAndDelete(id);

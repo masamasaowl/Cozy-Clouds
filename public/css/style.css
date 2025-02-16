@@ -85,7 +85,14 @@ h1{
     align-items: center;
     padding-right: 108px;
 }
-
+.firstNavbar{
+    position: relative;
+    right: 12.5rem;
+}
+.secondNavbar{
+    position: relative;
+    left: 20rem;
+}
 
 /* ============= boilerplate.ejs ========== */
 .title{
@@ -223,6 +230,10 @@ h1{
     font-size: 0.8rem;
 }
 
+.signupBtn{
+    width: 70%;
+    margin: auto;
+}
 
 /* =============== Error.ejs =============== */
 .errorContainer{
@@ -237,6 +248,7 @@ h1{
     color: #FF5A5F;
     font-size: 2rem;
 }
+
 
 
 /* =============== footer =============== */
