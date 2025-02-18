@@ -40,7 +40,7 @@ async function main() {
 const sessionOptions = {
   secret: 'mySuperSecret',
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {
     expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
     maxAge: 7 * 24 * 60 * 60 * 1000,
@@ -49,15 +49,6 @@ const sessionOptions = {
 }
 app.use(session(sessionOptions));
 
-// flash
-app.use(flash());
-app.use((req,res,next) => {
-  res.locals.success = req.flash("success");
-  res.locals.error = req.flash("error");
-  res.locals.info = req.flash("info");
-  next();
-});
-
 // passport middlewares
 app.use(passport.initialize());
 app.use(passport.session());
@@ -65,6 +56,15 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// flash
+app.use(flash());
+app.use((req,res,next) => {
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  res.locals.info = req.flash("info");
+  res.locals.currUser = req.user;
+  next();
+});
 
 // Request-Middlewares
 app.use(methodOverride("_method"));
