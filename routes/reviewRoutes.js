@@ -3,27 +3,11 @@ const express = require("express");
 const router = express.Router({mergeParams: true});
 // require wrapAsync
 const wrapAsync = require("../utils/wrapAsync.js");
-// custom error class
-const ExpressError = require("../utils/ExpressError.js");
 // model
 const Listing = require("../models/listing.js");
 const Review = require("../models/review.js");
-// Joi schema
-const { reviewSchema} = require("../schema.js");
 // check is user is logged in
-const { isLoggedIn } = require("../middleware.js");
-
-// server side validation for reviews
-const validateReviews = (req,res,next) => {
-    let { error } = reviewSchema.validate(req.body);
-  
-    if(error){
-      let errMsg = error.details.map((el) => el.message).join(", ");
-      throw new ExpressError(400, errMsg);
-    }else{
-      next();
-    }
-};
+const { isLoggedIn, validateReviews } = require("../middleware.js");
 
 
 // =============== Create Route =================
@@ -34,7 +18,9 @@ router.post("/",isLoggedIn, validateReviews, wrapAsync(async(req,res) => {
     // extract and store the review object from the form
     let newReview = new Review(req.body.review)
     
-    console.log(listing.review)
+    // add author
+    newReview.author = req.user._id;
+    
     // store in the review array of the listing
     listing.review.push(newReview);
 
@@ -46,8 +32,16 @@ router.post("/",isLoggedIn, validateReviews, wrapAsync(async(req,res) => {
 }));
   
 // ================== Delete Route =====================
-router.delete("/:reviewId", wrapAsync(async(req,res) => {
+router.delete("/:reviewId", isLoggedIn, wrapAsync(async(req,res) => {
     let { id, reviewId } = req.params;
+
+    let review = await Review.findById(reviewId);
+
+    if(!req.user._id.toString() === review.author._id.toString()){
+        req.flash("error", "You don't have permission to perform this operation");
+        return res.redirect(`/listings/show/${id}`);
+    }
+
     // delete from collection
     await Review.findByIdAndDelete(reviewId)
   
@@ -59,6 +53,6 @@ router.delete("/:reviewId", wrapAsync(async(req,res) => {
     res.redirect(`/listings/show/${id}`)
 }));
   
-// =======================================================
+// =====================================================
 
 module.exports = router;

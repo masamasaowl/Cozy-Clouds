@@ -2,31 +2,10 @@ const express = require("express");
 const router = express.Router();
 // require wrapAsync
 const wrapAsync = require("../utils/wrapAsync.js");
-// custom error class
-const ExpressError = require("../utils/ExpressError.js");
 // model
 const Listing = require("../models/listing.js");
-const Review = require("../models/review.js");
-// Joi schema
-const { listingSchema } = require("../schema.js");
 // check is user is logged in
-const { isLoggedIn } = require("../middleware.js");
-
-
-
-// validate Listing by Joi
-const validateListing = (req,res,next) => {
-    let { error } = listingSchema.validate(req.body);
-  
-    if(error){
-      // combining the properties and details from the error msg
-      let errMsg = error.details.map((el) => el.message).join(", ");
-  
-      throw new ExpressError(400, errMsg);
-    }else{
-      next();
-    }
-};
+const { isLoggedIn, isOwner, validateListing } = require("../middleware.js");
 
 
 // =================== Index route ===============
@@ -43,7 +22,14 @@ router.get("/",wrapAsync(async(req,res) => {
 router.get("/show/:id",wrapAsync(async(req,res) => {
   let {id} = req.params;
 
-  let listing = await Listing.findById(id).populate("review").populate("owner");
+  let listing = await Listing.findById(id)
+    .populate({
+      path: "review",
+      populate: {
+        path: "author"
+      },
+    })
+    .populate("owner");
 
   // flash message if listing doesn't exist
   if(!listing){
@@ -57,8 +43,7 @@ router.get("/show/:id",wrapAsync(async(req,res) => {
 // =================== Create route ==============
 // a form to accept the details
 router.get("/new", isLoggedIn,(req,res) => {
-  console.log(req.user)
-    res.render("newListing");
+  res.render("newListing");
 });
 
 // a post request to make changes 
@@ -81,7 +66,7 @@ router.post("/", isLoggedIn, validateListing, wrapAsync(async(req,res,next) => {
 
 // ============== Update route ============
 // update form
-router.get("/edit/:id",isLoggedIn,wrapAsync(async(req,res) => {
+router.get("/edit/:id",isLoggedIn, isOwner, wrapAsync(async(req,res) => {
   // extract id
   let {id} = req.params;
 
@@ -95,12 +80,11 @@ router.get("/edit/:id",isLoggedIn,wrapAsync(async(req,res) => {
   res.render("edit.ejs", {listing});
 })) ;
 
-router.put("/:id",isLoggedIn,validateListing, wrapAsync(async(req,res) => {
+router.put("/:id",isLoggedIn, isOwner,validateListing, wrapAsync(async(req,res) => {
   // extract id
   let {id} = req.params;
 
   // let listing = req.body.listing;
-
   // instead of this we can be more direct and use our concept of destructuring
   let updatedListing = await Listing.findByIdAndUpdate(
     id,
@@ -116,7 +100,7 @@ router.put("/:id",isLoggedIn,validateListing, wrapAsync(async(req,res) => {
 
 
 // ============== Delete route ===============
-router.delete("/delete/:id",isLoggedIn, wrapAsync(async(req,res) => {
+router.delete("/delete/:id",isLoggedIn, isOwner,  wrapAsync(async(req,res) => {
   let {id} = req.params;
 
   let deletedListing = await Listing.findByIdAndDelete(id);

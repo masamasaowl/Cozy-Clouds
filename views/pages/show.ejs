@@ -11,7 +11,7 @@
         </div>
     
         <div class="showTextContainer">
-            <p> Hosted by:&nbsp;&nbsp;<i><%= listing.owner[0].username %></i><p>
+            <p> Hosted by:&nbsp;&nbsp;<i>@<%= listing.owner[0].username %></i><p>
     
             <p class=" poppins-regular" ><%= listing.description %></p>
     
@@ -23,7 +23,7 @@
             <p class=" poppins-regular" ><%= listing.country %></p>
         </div>
 
-        <% if(currUser && currUser.username === listing.owner[0].username){ %>
+        <% if(currUser && currUser._id.toLocaleString() === listing.owner[0]._id.toLocaleString()){ %>
             <div class="editListing">
                 <form method="get" action="/listings/edit/<%= listing._id %>">
                     <button type="submit" class=" poppins-regular">Edit listing</button>
@@ -39,12 +39,16 @@
         <% } %> 
 
     </div>
+    
+    <% if(currUser){ %>
 
     <hr>
     
     <div class="reviewBox">
         <h4 class="poppins-regular">Leave a review</h4>
-
+        
+        
+            
         <form method="post" action="/listings/<%= listing._id %>/review">
             <div class="poppins-regular ratingBox">
                 <label for="rating">Rating
@@ -64,7 +68,10 @@
             <button type="submit" class="submitBtn">Post</button>
 
         </form>
+        
     </div>
+
+    <% } %>
 
     
     <% if(listing.review[0]){ %>
@@ -80,11 +87,11 @@
             <% for(review of listing.review){ %>
                 
                     <div class="showReviewBox">
-                        <p class="reviewUsername">Masamasaowl</p>
+                        <p class="reviewUsername">@<%= review.author.username %></p>
                         <p class="reviewRating"><%= review.rating %> stars</p>
                         <p class="reviewComment"><%= review.comment %></p>
 
-                        <% if(currUser && currUser.username === listing.owner[0].username){ %>
+                        <% if(currUser && currUser._id.toLocaleString() === review.author._id.toLocaleString()){ %>
 
                         <form method="post" action="/listings/<%= listing._id %>/review/<%= review._id %>?_method=DELETE">
 
