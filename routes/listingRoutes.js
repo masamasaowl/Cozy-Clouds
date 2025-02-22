@@ -43,7 +43,7 @@ router.get("/",wrapAsync(async(req,res) => {
 router.get("/show/:id",wrapAsync(async(req,res) => {
   let {id} = req.params;
 
-  let listing = await Listing.findById(id).populate("review");
+  let listing = await Listing.findById(id).populate("review").populate("owner");
 
   // flash message if listing doesn't exist
   if(!listing){
@@ -57,6 +57,7 @@ router.get("/show/:id",wrapAsync(async(req,res) => {
 // =================== Create route ==============
 // a form to accept the details
 router.get("/new", isLoggedIn,(req,res) => {
+  console.log(req.user)
     res.render("newListing");
 });
 
@@ -68,6 +69,8 @@ router.post("/", isLoggedIn, validateListing, wrapAsync(async(req,res,next) => {
 
   // directly parse into the collection
   let newListing = new Listing(listing);
+  // add user information
+  newListing.owner = req.user._id;
   await newListing.save();
 
   console.log(newListing);

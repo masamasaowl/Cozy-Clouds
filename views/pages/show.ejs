@@ -11,6 +11,7 @@
         </div>
     
         <div class="showTextContainer">
+            <p> Hosted by:&nbsp;&nbsp;<i><%= listing.owner[0].username %></i><p>
     
             <p class=" poppins-regular" ><%= listing.description %></p>
     
@@ -21,22 +22,24 @@
     
             <p class=" poppins-regular" ><%= listing.country %></p>
         </div>
-    
-        <div class="editListing">
-            <form method="get" action="/listings/edit/<%= listing._id %>">
-    
-                <button type="submit" class=" poppins-regular">Edit listing</button>
-            </form>
-        </div>
-    
-        <div class="deleteListing">
-            <form method="post" action="/listings/delete/<%= listing._id %>?_method=DELETE">
-    
-                <button type="submit" class="deleteBtn poppins-regular">Delete listing</button>
-            </form>
-        </div>
+
+        <% if(currUser && currUser.username === listing.owner[0].username){ %>
+            <div class="editListing">
+                <form method="get" action="/listings/edit/<%= listing._id %>">
+                    <button type="submit" class=" poppins-regular">Edit listing</button>
+                </form>
+            </div>
+        
+            <div class="deleteListing">
+                <form method="post" action="/listings/delete/<%= listing._id %>?_method=DELETE">
+        
+                    <button type="submit" class="deleteBtn poppins-regular">Delete listing</button>
+                </form>
+            </div>
+        <% } %> 
+
     </div>
-    
+
     <hr>
     
     <div class="reviewBox">
@@ -56,14 +59,21 @@
 
                 <textarea name="review[comment]" id="comment" rows="4" required></textarea>
             </div>
-
+            
+            
             <button type="submit" class="submitBtn">Post</button>
 
         </form>
     </div>
 
-    <hr>
-    <h5 class="reviewsText"><u>Reviews</u></h5>
+    
+    <% if(listing.review[0]){ %>
+        <hr>
+
+        <h5 class="reviewsText"><u>Reviews</u></h5>
+
+    <% } %>
+    
 
     <div class="allReviews">    
         
@@ -74,10 +84,14 @@
                         <p class="reviewRating"><%= review.rating %> stars</p>
                         <p class="reviewComment"><%= review.comment %></p>
 
+                        <% if(currUser && currUser.username === listing.owner[0].username){ %>
+
                         <form method="post" action="/listings/<%= listing._id %>/review/<%= review._id %>?_method=DELETE">
 
                             <button class="deleteBtn delReviewBtn">Delete</button>
                         </form>
+
+                        <% } %> 
                     </div>     
             <% } %>
     

@@ -10,7 +10,8 @@ const Listing = require("../models/listing.js");
 const Review = require("../models/review.js");
 // Joi schema
 const { reviewSchema} = require("../schema.js");
-
+// check is user is logged in
+const { isLoggedIn } = require("../middleware.js");
 
 // server side validation for reviews
 const validateReviews = (req,res,next) => {
@@ -26,7 +27,7 @@ const validateReviews = (req,res,next) => {
 
 
 // =============== Create Route =================
-router.post("/",validateReviews, wrapAsync(async(req,res) => {
+router.post("/",isLoggedIn, validateReviews, wrapAsync(async(req,res) => {
     let id = req.params.id;
     let listing = await Listing.findById(id).populate("review");
   

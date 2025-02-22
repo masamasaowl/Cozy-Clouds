@@ -14,6 +14,7 @@ const path = require("path");
 const ExpressError = require("./utils/ExpressError.js");
 // ejs-mate
 const ejsMate = require ("ejs-mate");
+
 // express-session
 const session = require("express-session");
 // flash
@@ -24,6 +25,7 @@ const LocalStrategy = require("passport-local");
 const User = require('./models/user.js');
 // mongoose
 const mongoose = require('mongoose');
+const { options } = require("joi");
 
 
 // mongoDB setup
