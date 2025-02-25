@@ -89,7 +89,6 @@ app.listen(port, () => {
 
 //  =============================================
 
-
 // ================ Test document ===============
 // app.get("/testListing", async(req,res) => {
 //     let sampleListing = new Listing ({
