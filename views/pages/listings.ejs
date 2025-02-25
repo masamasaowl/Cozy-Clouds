@@ -5,7 +5,7 @@
     <ul class="listingContainer">
         <% for(let listing of allListings){ %> 
             <div class="row">             
-                    <a class="" href="/listings/show/<%= listing._id %>">
+                    <a class="" href="/listings/<%= listing._id %>">
                         <div class="imageContainer">
                             <img src="<%= listing.image.url %>" class="card-img-top" alt="listing image">            
                         </div>                        
@@ -13,7 +13,7 @@
  
                 <li class="listOfTitles">
     
-                    <a class="poppins-regular listingTitle" href="/listings/show/<%= listing._id %>">
+                    <a class="poppins-regular listingTitle" href="/listings/<%= listing._id %>">
                         <%= listing.title %>
                     </a>
     

@@ -25,7 +25,6 @@ const LocalStrategy = require("passport-local");
 const User = require('./models/user.js');
 // mongoose
 const mongoose = require('mongoose');
-const { options } = require("joi");
 
 
 // mongoDB setup

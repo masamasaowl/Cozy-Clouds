@@ -2,6 +2,11 @@ const User = require("../models/user");
 
 
 // =================== Signup route ==============
+module.exports.renderSignupForm = (req,res) => {
+    res.render("signupForm.ejs");
+};
+
+
 module.exports.signupUser = async(req,res) => {
     try {
         let { email, username, password } = req.body;
@@ -28,6 +33,11 @@ module.exports.signupUser = async(req,res) => {
 
 
 // =================== Login route ==============
+module.exports.renderLoginForm = (req,res) => {
+    res.render("loginForm.ejs");
+};
+
+
 module.exports.loginUser = async(req,res) => {
     req.flash('success', "Welcome back");
 

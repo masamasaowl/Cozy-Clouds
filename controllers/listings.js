@@ -32,6 +32,11 @@ module.exports.showListing = async(req,res) => {
 
 
 // ================== Create route ================
+module.exports.renderCreateForm = (req,res) => {
+  res.render("newListing");
+};
+
+
 module.exports.createListings = async(req,res,next) => {
   // let {title,location} = req.body;
   // instead we store the listing object which has all the values 
