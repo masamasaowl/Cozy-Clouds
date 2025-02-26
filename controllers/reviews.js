@@ -21,7 +21,7 @@ module.exports.createReview = async(req,res) => {
     await listing.save();
     
     req.flash("success", "Review was added!");
-    res.redirect(`/listings/show/${id}`);
+    res.redirect(`/listings/${id}`);
 };
 
 
@@ -33,7 +33,7 @@ module.exports.deleteReview = async(req,res) => {
 
     if(!req.user._id.toString() === review.author._id.toString()){
         req.flash("error", "You don't have permission to perform this operation");
-        return res.redirect(`/listings/show/${id}`);
+        return res.redirect(`/listings/${id}`);
     }
 
     // delete from collection
@@ -44,5 +44,5 @@ module.exports.deleteReview = async(req,res) => {
     await Listing.findByIdAndUpdate(id, {$pull: {review: reviewId}});
     
     req.flash("success", "Review was deleted");
-    res.redirect(`/listings/show/${id}`)
+    res.redirect(`/listings/${id}`)
 };

@@ -87,7 +87,7 @@ module.exports.updateListings = async(req,res) => {
 
   console.log(updatedListing);
   req.flash("success", "listing was edited successfully!");
-  res.redirect(`/listings/show/${id}`);
+  res.redirect(`/listings/${id}`);
 };
 
 

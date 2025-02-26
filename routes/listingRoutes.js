@@ -8,6 +8,7 @@ const { isLoggedIn, isOwner, validateListing } = require("../middleware.js");
 const listingController = require("../controllers/listings.js");
 
 
+// ===================== Route "/" =========================
 router
     .route('/')
     // Index route
@@ -21,6 +22,7 @@ router
     );
 
 
+// ==================== Route "/:id" ========================
 router
     .route("/:id")   
     // Show route
@@ -32,7 +34,7 @@ router
     .delete(isLoggedIn, isOwner,  wrapAsync(listingController.deleteListings)); 
 
 
-// =================== Create route ==============
+// =================== New route ==============
 // a form to accept the details
 router.get("/new", isLoggedIn, listingController.renderCreateForm);
 
