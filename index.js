@@ -1,4 +1,7 @@
 // ================ BASIC SETUP =================
+if(process.env.NODE_ENV != "production"){
+  require('dotenv').config();
+}
 
 let express = require ("express");
 const app = express();
@@ -57,7 +60,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// flash
+// flash middlewares
 app.use(flash());
 app.use((req,res,next) => {
   res.locals.success = req.flash("success");

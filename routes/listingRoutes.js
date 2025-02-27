@@ -6,6 +6,19 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const { isLoggedIn, isOwner, validateListing } = require("../middleware.js");
 // controller for listings
 const listingController = require("../controllers/listings.js");
+// multer
+const multer = require('multer');
+const upload = multer({dest: "uploads/"});
+
+
+// =================== New route ==============
+// a form to accept the details
+router.get("/new", isLoggedIn, listingController.renderCreateForm);
+
+
+// ============== Edit route ============
+// update form
+router.get("/edit/:id",isLoggedIn, isOwner, wrapAsync(listingController.editListings)) ;
 
 
 // ===================== Route "/" =========================
@@ -32,16 +45,6 @@ router
     .put(isLoggedIn, isOwner,validateListing, wrapAsync(listingController.updateListings))
     // Delete route
     .delete(isLoggedIn, isOwner,  wrapAsync(listingController.deleteListings)); 
-
-
-// =================== New route ==============
-// a form to accept the details
-router.get("/new", isLoggedIn, listingController.renderCreateForm);
-
-
-// ============== Edit route ============
-// update form
-router.get("/edit/:id",isLoggedIn, isOwner, wrapAsync(listingController.editListings)) ;
 
 
 // =============================================

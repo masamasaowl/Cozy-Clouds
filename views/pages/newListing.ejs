@@ -6,7 +6,7 @@
     </h2>
 
 
-    <form class="createForm" method="post" action="/listings" novalidate>
+    <form class="createForm" method="post" action="/listings" enctype="multipart/form-data" novalidate>
         <p>Title</p>
         <input class="inputBox poppins-regular" type="text" name="listing[title]" placeholder="Name of listing" required>
 
@@ -15,6 +15,9 @@
 
         <p>Image link</p>
         <input class=" poppins-regular" type="text" placeholder="Enter the Image Link">
+
+        <p>Upload listing image </p>
+        <input class=" poppins-regular" type="file" >
 
 
         <p>Price</p>
