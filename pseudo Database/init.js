@@ -18,10 +18,20 @@ const initDB = async() => {
     // delete any previously stored data
     await Listing.deleteMany({});
 
-    // add the owner field
+    // Default geometry for all listings
+    const defaultGeometry = {
+      type: "Point",
+      coordinates: [73.8567437, 18.5204303]
+    };
+  
+    
     initData.data = initData.data.map((obj) => ({
-      ...obj, owner: "67b36acc2031430240864753" 
-    }))
+      ...obj, 
+      // Add the owner and geometry fields
+      owner: "67b36acc2031430240864753", 
+      // Add geometry to every listing
+      geometry: defaultGeometry  
+    }));
 
     // insert the data
     // initData is th imported object and .data is the key of it containing all the sampleListings 

@@ -6,11 +6,10 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const { isLoggedIn, isOwner, validateListing } = require("../middleware.js");
 // controller for listings
 const listingController = require("../controllers/listings.js");
-// multer
-const multer = require('multer');
+
 // cloudinary + multer
-const { storage } = require('../cloudConfig.js')
-const upload = multer({ storage });
+const { cloudinary, upload } = require('../cloudConfig.js')
+
 
 
 // =================== New route ==============

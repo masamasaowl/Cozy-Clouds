@@ -1,5 +1,8 @@
 // model
+const { uploadToCloudinary } = require("../cloudConfig.js");
 const Listing = require("../models/listing.js");
+// to make HTTP request to Google Maps
+const axios = require("axios");
 
 
 // =================== Index route ===============
@@ -27,7 +30,9 @@ module.exports.showListing = async(req,res) => {
     req.flash("error", "The listing you requested for doesn't exist ")
     res.redirect("/listings")
   }
-  res.render("show.ejs", {listing});
+
+  const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+  res.render("show.ejs", {listing, apiKey });
 };
 
 
@@ -38,14 +43,12 @@ module.exports.renderCreateForm = (req,res) => {
 
 
 module.exports.createListings = async(req,res,next) => {
-  if(!req.file){
-    req.flash("error", "Listing image is required");
-    res.redirect("/listings/new");
-  }
-  
+  // upload the image the image to cloudinary
+  const uploadedImg = await uploadToCloudinary(req.file.buffer);
+
   // parse url and filename as saved on cloudinary
-  let url = req.file.path;
-  let filename = req.file.filename;
+  let url = uploadedImg.secure_url;
+  let filename = uploadedImg.public_id;
 
   // let {title,location} = req.body;
   // instead we store the listing object which has all the values 
@@ -58,6 +61,30 @@ module.exports.createListings = async(req,res,next) => {
   // save image url and filename
   newListing.image = { url,filename };
 
+  // geocoding the location
+  const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+  // sending the location of newListing to be geocoded by Google Maps
+  const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(newListing.location)}&key=${apiKey}`;
+
+  const response = await axios.get(geocodeUrl);
+  const { data } = response;
+
+  // check if correct response was returned
+  if (data.status === 'OK') {
+    // pull coordinates
+    const coordinates = data.results[0].geometry.location;
+
+    // save coordinates in the database
+    newListing.geometry = {
+      type: "Point",
+      coordinates: [coordinates.lng, coordinates.lat]
+    };
+  } else {
+    console.error('Geocoding error:', data.status);
+    req.flash("error", "Invalid location. Please try again.");
+    return res.redirect("/listings/new");
+  }
+    
   await newListing.save();
 
   console.log(newListing);

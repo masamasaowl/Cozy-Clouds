@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Review = require("./review"); 
+const { required } = require("joi");
 const Schema = mongoose.Schema;
 
 const listingSchema = new Schema({
@@ -46,7 +47,17 @@ const listingSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "User"
         }
-    ]
+    ],
+    geometry: {
+        type: {
+            type: String,
+            default: "Point" 
+        }, 
+        coordinates: {
+            type: [Number],
+            required: true
+        }
+    },
 });
 
 // a mongoose middleware to delete all reviews of a listing is deleted
