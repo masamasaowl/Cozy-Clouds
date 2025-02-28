@@ -38,6 +38,15 @@ module.exports.renderCreateForm = (req,res) => {
 
 
 module.exports.createListings = async(req,res,next) => {
+  if(!req.file){
+    req.flash("error", "Listing image is required");
+    res.redirect("/listings/new");
+  }
+  
+  // parse url and filename as saved on cloudinary
+  let url = req.file.path;
+  let filename = req.file.filename;
+
   // let {title,location} = req.body;
   // instead we store the listing object which has all the values 
   let listing = req.body.listing;
@@ -46,6 +55,9 @@ module.exports.createListings = async(req,res,next) => {
   let newListing = new Listing(listing);
   // add user information
   newListing.owner = req.user._id;
+  // save image url and filename
+  newListing.image = { url,filename };
+
   await newListing.save();
 
   console.log(newListing);
@@ -67,7 +79,14 @@ module.exports.editListings = async(req,res) => {
     req.flash("error", "The listing you requested for doesn't exist ")
     res.redirect("/listings")
   }
-  res.render("edit.ejs", {listing});
+
+  // displaying a scaled down listing image 
+  let originalImageUrl = listing.image.url;
+
+  // replace cloudinary url to scale down
+  originalImageUrl = originalImageUrl.replace('/upload', '/upload/w_140');
+
+  res.render("edit.ejs", {listing, originalImageUrl});
 };
 
 
@@ -84,6 +103,15 @@ module.exports.updateListings = async(req,res) => {
     {runValidators: true, new: true},
   );
   // what this does is the listing object it is deconstructed and the value is stored directly 
+
+  // save image in the updated listing
+  if(req.file){
+    let url = req.file.path;
+    let filename = req.file.filename;
+
+    updatedListing.image = { url,filename };
+    await updatedListing.save();
+  }
 
   console.log(updatedListing);
   req.flash("success", "listing was edited successfully!");

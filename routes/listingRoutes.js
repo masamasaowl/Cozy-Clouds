@@ -8,7 +8,9 @@ const { isLoggedIn, isOwner, validateListing } = require("../middleware.js");
 const listingController = require("../controllers/listings.js");
 // multer
 const multer = require('multer');
-const upload = multer({dest: "uploads/"});
+// cloudinary + multer
+const { storage } = require('../cloudConfig.js')
+const upload = multer({ storage });
 
 
 // =================== New route ==============
@@ -29,8 +31,11 @@ router
     .get(wrapAsync(listingController.index))
     // Create route
     // a post request to make changes 
+
     .post(
-        isLoggedIn, validateListing,
+        isLoggedIn,
+        upload.single("listing[image]"),
+        validateListing,
         wrapAsync(listingController.createListings)
     );
 
@@ -42,7 +47,12 @@ router
     // Read operation to view the listing in detail
     .get(wrapAsync(listingController.showListing))
     // Update route
-    .put(isLoggedIn, isOwner,validateListing, wrapAsync(listingController.updateListings))
+    .put(
+        isLoggedIn,
+        isOwner,
+        upload.single("listing[image]"),
+        validateListing,
+        wrapAsync(listingController.updateListings))
     // Delete route
     .delete(isLoggedIn, isOwner,  wrapAsync(listingController.deleteListings)); 
 

@@ -6,25 +6,21 @@
     </h2>
 
 
-    <form class="createForm" method="post" action="/listings" enctype="multipart/form-data" novalidate>
+    <form class="createForm" method="post" action="/listings" enctype="multipart/form-data" >
         <p>Title</p>
         <input class="inputBox poppins-regular" type="text" name="listing[title]" placeholder="Name of listing" required>
 
         <p>Description</p>
         <textarea class=" poppins-regular" type="text" name="listing[description]" placeholder="description" required></textarea>
 
-        <p>Image link</p>
-        <input class=" poppins-regular" type="text" placeholder="Enter the Image Link">
-
         <p>Upload listing image </p>
-        <input class=" poppins-regular" type="file" >
-
+        <input class=" poppins-regular" type="file" name="listing[image]" required>
 
         <p>Price</p>
         <input class=" poppins-regular" type="number" name="listing[price]" placeholder="price in INR" required>
 
         <p>Location</p>
-        <input class=" poppins-regular" type="text" name="listing[location]" placeholder=" Enter location" required>
+        <input class="listingLocation poppins-regular" type="text" name="listing[location]" placeholder=" Enter location" required>
 
         <p>Country</p>
         <input class=" poppins-regular" type="text" name="listing[country]" placeholder="Enter country" required >
