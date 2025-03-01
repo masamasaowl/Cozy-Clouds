@@ -86,8 +86,8 @@ h1{
     padding-right: 108px;
 }
 .firstNavbar{
-    position: relative;
-    right: 12.5rem;
+    position: absolute;
+    left: 10rem;
 }
 .secondNavbar{
     position: relative;
@@ -98,6 +98,94 @@ h1{
 .title{
     text-align: center;
 }
+
+/* ============== Searchbar ================ */
+.searchArea{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 60px;
+    margin: auto;
+    background-color: white;
+    box-shadow: 1.5px 1.5px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 100px;
+    margin-bottom: 30px;
+    margin-top: 10vh;
+}
+.where, .fore, .date, .location{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 60px;
+    padding: 1.4rem 2rem;
+    font-size: 0.85rem;
+    border-radius: 100px;
+}
+.where:hover, .fore:hover,.date:hover, .location:hover {
+    background-color:rgba(215, 213, 213, 0.78) ;
+    transition: background-color 0.1s ease-in-out;
+}
+.where p,.fore p, .date p, .location p{
+    margin: 0;
+}
+.searchbar, .timePeriod, .addDates,.yourLocation{
+    border: none;
+    background: none;
+}
+.searchbar{
+    width: 100%;
+}
+.searchIcon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 7.7rem;
+    height: 3.2rem;
+    border-radius:50% ;
+    background-color: #FF5A5F;
+    margin-right: 10px;
+}
+.searchIcon i, .locationIcon i{
+    color: #F7F7F7;
+    font-size: 1.2rem;
+}
+.searchIcon:hover, .locationIcon:hover{
+    background-color: rgb(235, 188, 0);
+    transition: background-color 0.2s ease-in-out;
+}
+.searchResults{
+    position: absolute;
+    background-color: #ffcc00;
+    top: 120%;
+    left: 0;
+    z-index: 100;
+    border-radius: 35px;
+    max-height: 400px;
+    width: 400px;
+    overflow-y: auto;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
+}
+.timeRange{
+    position: absolute;
+    background-color: #ffcc00;
+    top: 120%;
+    left: 45%;
+    z-index: 100;
+    border-radius: 35px;
+    max-height: 400px;
+    width: 400px;
+    overflow-y: auto;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
+}
+.verticalLine {
+    width: 1px; 
+    background-color: #ccc; 
+    height: 70%; 
+    margin: auto;
+}
+
 
 /* ============= listing.ejs ============== */
 .listingContainer{
@@ -182,7 +270,7 @@ h1{
 
 
 /* ================ Show.ejs ================== */
-.showContainer, .reviewBox, .reviewsText, .allReviews{
+.showContainer, .reviewBox, .reviewsText, .allReviews, .showMap{
     width: 65%;
     margin: auto;
 }
@@ -234,7 +322,14 @@ h1{
     width: 70%;
     margin: auto;
 }
-
+.showMap{
+    background-color: #FF5A5F;
+    height: 400px;
+}
+#map{
+    height: 400px;
+    width: 100%;
+}
 /* =============== Error.ejs =============== */
 .errorContainer{
     width: 60%;
