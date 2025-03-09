@@ -27,10 +27,12 @@ const initDB = async() => {
     
     initData.data = initData.data.map((obj) => ({
       ...obj, 
-      // Add the owner and geometry fields
+      // Add the owner
       owner: "67b36acc2031430240864753", 
       // Add geometry to every listing
-      geometry: defaultGeometry  
+      geometry: defaultGeometry,
+      // Add category
+      // category: "Trending"
     }));
 
     // insert the data

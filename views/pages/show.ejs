@@ -21,6 +21,8 @@
             <p class=" poppins-regular" ><%= listing.location %></p>
     
             <p class=" poppins-regular" ><%= listing.country %></p>
+
+            <p class="categoryTag poppins-regular" ><%= listing.category %></p>
         </div>
 
         <% if(currUser && currUser._id.toLocaleString() === listing.owner[0]._id.toLocaleString()){ %>

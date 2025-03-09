@@ -85,10 +85,6 @@ h1{
     align-items: center;
     padding-right: 108px;
 }
-.firstNavbar{
-    /* position: absolute;
-    left: 10rem; */
-}
 .secondNavbar{
     position: absolute;
     right: 3rem;
@@ -186,6 +182,19 @@ h1{
     height: 70%; 
     margin: auto;
 }
+.categoryTag{
+    background-color: #FF5A5F ;
+    padding: 3px 10px;
+    border-radius: 15px;
+    color: #F7F7F7;
+    border: 1.5px solid #1E293B;
+    font-size: 0.9rem; 
+    display: inline-block;   
+}
+.categoryTag:hover{
+    background-color: #FF5A5F ;
+    color: #F7F7F7; 
+}
 
 
 /* ============== Categories ================ */
@@ -239,8 +248,13 @@ h1{
     transition: background-color 0.2s ease-in-out;
 }
 .categoryIcon{
-    color: #FF5A5F;
-    
+    color: rgb(76, 76, 76);
+    font-size: 1.2rem;
+    display: block;
+    text-align: center;
+}
+.categoryIcon:hover{
+    color: rgb(30, 41, 59);
 }
 
 

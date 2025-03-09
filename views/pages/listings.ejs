@@ -1,8 +1,74 @@
 <% layout("../layouts/boilerplate.ejs") %>
 
 <body>
+
+    <div class="maneuverBar">
+        <div class="categories">
+            <ul class="listOfCategories">
+                <li >
+                    <i class="fa-solid fa-fire-flame-curved  categoryIcon"></i>
+                
+                    <button id="category" class="categoryBtn poppins-regular clickedBtn" data-name="Trending">
+                        Trending
+                    </button>
+                </li>
+                <li >
+                    <i class="fa-solid fa-city categoryIcon"></i>
     
-    <ul class="listingContainer">
+                    <button id="category" class="categoryBtn poppins-regular" data-name="Cities">
+                        Cities
+                    </button>
+                </li>
+                <li >
+                    <i class="fa-solid fa-mountain-sun categoryIcon"></i>
+    
+                    <button id="category" class="categoryBtn poppins-regular" data-name="Mountains">
+                        Mountains
+                    </button>
+                </li>
+                <li >
+                    <i class="fa-solid fa-umbrella-beach categoryIcon"></i>
+    
+                    <button id="category" class="categoryBtn poppins-regular" data-name="Beaches">
+                        Beaches
+                    </button>
+                </li>
+                
+                <li >
+                    <i class="fa-solid fa-water-ladder categoryIcon"></i>
+    
+                    <button id="category" class="categoryBtn poppins-regular" data-name="Amazing pools">
+                        Amazing pools
+                    </button>
+                </li>
+                <li >
+                    <i class="fa-solid fa-tree categoryIcon"></i>
+    
+                    <button id="category" class="categoryBtn poppins-regular" data-name="Lush green">
+                        Lush green
+                    </button>
+                </li>
+                
+                <li >
+                    <i class="fa-solid fa-snowflake categoryIcon"></i>
+    
+                    <button id="category" class="categoryBtn poppins-regular" data-name="Snowy peaks">
+                        Snowy peaks
+                    </button>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="filterBox">
+            <button class="filter poppins-regular">
+                <i class="fa-solid fa-sliders"></i>
+                &nbsp;Filters
+            </button>
+        </div>
+    </div>
+    
+    
+    <ul class="listingContainer" id="dataContainer">
         <% for(let listing of allListings){ %> 
             <div class="row">             
                     <a class="" href="/listings/<%= listing._id %>">

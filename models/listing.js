@@ -58,6 +58,11 @@ const listingSchema = new Schema({
             required: true
         }
     },
+    category: {
+        type: String,
+        enum: ["Mountains", "Snowy peaks", "Trending", "Cities", "Lush green", "Amazing pools", "Beaches"],
+        default: "Trending"
+    }
 });
 
 // a mongoose middleware to delete all reviews of a listing is deleted
