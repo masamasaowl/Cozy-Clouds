@@ -106,10 +106,6 @@ app.listen(port, () => {
 // });
 
 
-// Home Routes
-app.get("/", (req,res) => {
-  res.render("home.ejs");
-});
 
 // Listings Routes 
 app.use("/listings", listingRoutes);

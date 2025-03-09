@@ -26,14 +26,14 @@
         <% if(currUser && currUser._id.toLocaleString() === listing.owner[0]._id.toLocaleString()){ %>
             <div class="editListing">
                 <form method="get" action="/listings/edit/<%= listing._id %>">
-                    <button type="submit" class=" poppins-regular">Edit listing</button>
+                    <button type="submit" class=" poppins-regular button">Edit listing</button>
                 </form>
             </div>
         
             <div class="deleteListing">
                 <form method="post" action="/listings/<%= listing._id %>?_method=DELETE">
         
-                    <button type="submit" class="deleteBtn poppins-regular">Delete listing</button>
+                    <button type="submit" class="deleteBtn poppins-regular button">Delete listing</button>
                 </form>
             </div>
         <% } %> 
@@ -79,7 +79,7 @@
             </div>
             
             
-            <button type="submit" class="submitBtn">Post</button>
+            <button type="submit" class="submitBtn button">Post</button>
 
         </form>
         
@@ -113,7 +113,7 @@
 
                         <form method="post" action="/listings/<%= listing._id %>/review/<%= review._id %>?_method=DELETE">
 
-                            <button class="deleteBtn delReviewBtn">Delete</button>
+                            <button class="deleteBtn delReviewBtn button">Delete</button>
                         </form>
 
                         <% } %> 

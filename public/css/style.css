@@ -32,7 +32,7 @@ body{
     flex-direction: column;
     min-height: 100vh;
 }
-button{
+.button{
     background-color: #F7F7F7 ;
     padding: 4px 12px;
     border-radius: 15px;
@@ -40,7 +40,7 @@ button{
     border: 1.5px solid #1E293B;
     font-size: 1.2rem;    
 }
-button:hover{
+.button:hover{
     background-color: #FF5A5F ;
     color: #F7F7F7; 
 }
@@ -68,11 +68,11 @@ h1{
     background-size: cover;
     height: 50px;
     width: 108px;
+    margin-left: 2rem;
 }
 .navbar{
     height: 80px;
     background-color: #F7F7F7;
-    
 }
 .nav-link{
     color: #1E293B !important;
@@ -86,12 +86,12 @@ h1{
     padding-right: 108px;
 }
 .firstNavbar{
-    position: absolute;
-    left: 10rem;
+    /* position: absolute;
+    left: 10rem; */
 }
 .secondNavbar{
-    position: relative;
-    left: 20rem;
+    position: absolute;
+    right: 3rem;
 }
 
 /* ============= boilerplate.ejs ========== */
@@ -110,8 +110,9 @@ h1{
     background-color: white;
     box-shadow: 1.5px 1.5px 6px rgba(0, 0, 0, 0.2);
     border-radius: 100px;
-    margin-bottom: 30px;
-    margin-top: 10vh;
+    margin-bottom: 10px;
+    border: 1px solid rgba(215, 213, 213, 0.875) ;
+    /* margin-top: 10vh; */
 }
 .where, .fore, .date, .location{
     display: flex;
@@ -184,6 +185,62 @@ h1{
     background-color: #ccc; 
     height: 70%; 
     margin: auto;
+}
+
+
+/* ============== Categories ================ */
+.maneuverBar{
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.categories{
+    width: 70%;
+    margin: auto;
+    overflow-x: auto;
+}
+.listOfCategories{
+    display: flex;
+    justify-content: space-evenly;
+    list-style: none;
+    padding: 5px 10px;
+    margin-top: 4px;
+}
+.categoryBtn{
+    border: none;
+    color:rgb(106, 106, 106) ;
+    height: 40px;
+    background-color: #F7F7F7;
+}
+.categoryBtn:hover{
+    color: #212529;
+    border-bottom: 2px solid rgb(106, 106, 106);
+}
+.clickedBtn{
+    color: rgb(30, 41, 59);
+    border-bottom: 2px solid rgb(30, 41, 59);
+}
+.filterBox{
+    display: inline-block;
+    margin: auto;
+    padding-bottom: 12px;
+}
+.filter{
+    border: 1px solid #bababa;
+    width: 100px;
+    height: 50px;
+    border-radius: 100px;
+    background-color: #F7F7F7;
+}
+.filter:hover{
+    border: 1px solid #6a6a6a;
+    background-color: rgba(229, 226, 226, 0.603);
+    transition: background-color 0.2s ease-in-out;
+}
+.categoryIcon{
+    color: #FF5A5F;
+    
 }
 
 
