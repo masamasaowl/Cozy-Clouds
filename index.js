@@ -32,7 +32,7 @@ const User = require('./models/user.js');
 const mongoose = require('mongoose');
 
 // Mongo Atlas URL
-const dbURL = process.env.ATLAS_URL
+const dbURL = process.env.MONGO_ATLAS_URL
 
 // mongoDB setup
 main()
@@ -49,7 +49,7 @@ async function main() {
 const store = MongoStore.create({
   mongoUrl: dbURL,
   crypto:{
-    secret:"mySuperSecret"
+    secret: process.env.SESSION_SECRET
   },
   touchAfter:24*3600,
 });
@@ -60,7 +60,7 @@ store.on("error", () => {
 
 const sessionOptions = {
   store: store,
-  secret: 'mySuperSecret',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
