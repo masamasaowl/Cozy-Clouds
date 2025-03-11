@@ -156,3 +156,25 @@ module.exports.deleteListings = async(req,res) => {
     req.flash("success", "listing was deleted");
     res.redirect("/listings");
 };
+
+
+// ================ Route to fetch data based on category ========
+module.exports.switchCategory = async(req,res) => {
+  try {
+    // the type parameter in the query is returned
+    let typeOfLocation = req.query.category;
+    
+    // we call the places returned as a variable space in general
+    let listing = await Listing.find({category: {$in: [typeOfLocation]}});
+
+    console.log(listing)
+  
+    // we return the response to the fetch() function as json
+    res.json(listing);
+    // in categories.js it is stored in data
+  
+  } catch (error) {
+    // check for errors
+    res.status(500).json({ error: "Error fetching data" });
+  }
+};

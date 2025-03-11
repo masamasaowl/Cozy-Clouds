@@ -22,6 +22,10 @@ router.get("/new", isLoggedIn, listingController.renderCreateForm);
 router.get("/edit/:id",isLoggedIn, isOwner, wrapAsync(listingController.editListings)) ;
 
 
+// ================ Route to fetch data based on category ========
+router.get("/getData", wrapAsync(listingController.switchCategory));
+
+
 // ===================== Route "/" =========================
 router
     .route('/')
@@ -38,7 +42,6 @@ router
         wrapAsync(listingController.createListings)
     );
 
-    
 
 // ==================== Route "/:id" ========================
 router

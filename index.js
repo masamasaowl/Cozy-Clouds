@@ -20,6 +20,8 @@ const ejsMate = require ("ejs-mate");
 
 // express-session
 const session = require("express-session");
+// Mongo sessions store
+const MongoStore = require("connect-mongo");
 // flash
 const flash = require("connect-flash");
 // passport
@@ -29,6 +31,8 @@ const User = require('./models/user.js');
 // mongoose
 const mongoose = require('mongoose');
 
+// Mongo Atlas URL
+const dbURL = process.env.ATLAS_URL
 
 // mongoDB setup
 main()
@@ -37,14 +41,28 @@ main()
     })
     .catch(err => console.log(err));
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/cozyClouds');
+  await mongoose.connect(dbURL);
 };
 
 // sessions
+// Mongo Sessions Store
+const store = MongoStore.create({
+  mongoUrl: dbURL,
+  crypto:{
+    secret:"mySuperSecret"
+  },
+  touchAfter:24*3600,
+});
+
+store.on("error", () => {
+  console.log("Error in MONGO SESSIONS STORE", err);
+});
+
 const sessionOptions = {
+  store: store,
   secret: 'mySuperSecret',
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   cookie: {
     expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
     maxAge: 7 * 24 * 60 * 60 * 1000,
@@ -69,6 +87,8 @@ app.use((req,res,next) => {
   res.locals.currUser = req.user;
   next();
 });
+
+
 
 // Request-Middlewares
 app.use(methodOverride("_method"));
@@ -115,31 +135,6 @@ app.use("/listings/:id/review", reviewRoutes);
 
 // User Routes
 app.use("/", userRoutes);
-
-
-
-
-const Listing = require("./models/listing.js");
-// ================ Route to fetch data based on category ========
-app.get("/getData", async(req,res) => {
-  try {
-    // the type parameter in the query is returned
-    let typeOfLocation = req.query.category;
-    
-    // we call the places returned as a variable space in general
-    let listing = await Listing.find({category: {$in: [typeOfLocation]}});
-
-    console.log(listing)
-  
-    // we return the response to the fetch() function as json
-    res.json(listing);
-    // in categories.js it is stored in data
-  
-  } catch (error) {
-    // check for errors
-    res.status(500).json({ error: "Error fetching data" });
-  }
-});
 
 
 

@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "23.5.0"
+  },
   "name": "cozy-clouds",
   "version": "1.0.0",
   "description": "My first major project incorporating Frontend, backend and databases🌸✨ <br> It is a platform for wandering travellers looking for cozy spaces  <br> The entire project would be completed in three phases so many more functionalities are yet to come",
@@ -13,6 +16,7 @@
     "axios": "^1.8.1",
     "cloudinary": "^2.5.1",
     "connect-flash": "^0.1.1",
+    "connect-mongo": "^5.1.0",
     "cookie-parser": "^1.4.7",
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
@@ -22,6 +26,7 @@
     "express-session": "^1.18.1",
     "joi": "^17.13.3",
     "method-override": "^3.0.0",
+    "mongodb": "^6.14.2",
     "mongoose": "^8.9.2",
     "multer": "^1.4.5-lts.1",
     "passport": "^0.7.0",

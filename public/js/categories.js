@@ -21,24 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // choose the data-name attribute in the category buttons
             let categoryName = btn.dataset.name;
-            // let type;
-            // switch (categoryName) {
-            //     case "Spaces": type = ["mall", "workspace"];
-            //         break;
-            //     case "Entertainment": type = ["movieTheatre", "stadium"];
-            //         break;
-            //     case "Travel": type = ["airport", "railwayStation"];
-            //         break;
-            //     case "Stays": type = ["stay"];
-            //         break;    
-            //     case "Care": type = ["care"];
-            //         break;
-            //     case "Institutions": type = ["institution"];
-            //         break;
             
-            //     default:
-            //         break;
-            // }
             console.log(categoryName)
 
             await fetchData(categoryName);
@@ -57,12 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // the returned query is iterated and forms
-            // /getData?type=malls&type=workspaces
+            // /getData?category=Mountains
             type.forEach(t => query.append("category", t));
 
             // await the content via the query sent from the backend
             // fetch() is a promise that returns the response (res) object on the URL
-            const response = await fetch(`/getData?${query.toString()}`);
+            const response = await fetch(`/listings/getData?${query.toString()}`);
 
             // check for error
             if (!response.ok) throw new Error("Failed to fetch data");
@@ -122,7 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
             dataContainer.append(row);
         });
     };
-
 });
 
 
