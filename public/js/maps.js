@@ -26,4 +26,4 @@ async function initMap(latitude, longitude) {
     });
 }
 
-// initMap(listingCoordinates[1], listingCoordinates[0]);
+initMap(listingCoordinates[1], listingCoordinates[0]);

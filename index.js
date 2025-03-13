@@ -126,6 +126,10 @@ app.listen(port, () => {
 // });
 
 
+// landing page
+app.get("/", (req,res) => {
+  res.redirect("/listings");
+})
 
 // Listings Routes 
 app.use("/listings", listingRoutes);
