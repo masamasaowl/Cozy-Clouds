@@ -1,7 +1,7 @@
 # Cozy-Clouds
 My first major project incorporating Frontend, backend and databases🌸✨
 <br>
-cozy-clouds.onrender.com
+https://cozy-clouds.onrender.com
 <br>
 
 It is a platform for wandering travellers looking for cozy spaces 
